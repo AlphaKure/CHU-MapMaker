@@ -8,9 +8,12 @@ def tagM(data:str):
     return _tag
 
 def getstr(type:str,itemid:str):
+    '''
+    This is for reward
+    '''
     _Config=configparser.ConfigParser()
     _Config.read('config.ini')
-    _LibraryPath=_Config['AutoStr'][type+'Library']
+    _LibraryPath=_Config['AutoStr'][type]
     for _dir in os.listdir(_LibraryPath):
         if not os.path.isdir(_LibraryPath+'/'+_dir):
             continue
@@ -24,14 +27,18 @@ def getstr(type:str,itemid:str):
     os.system('pause')
     return False,' '
 
-def checkconfig(type:str):
+def checkconfig(section:str,type:str):
     _Config=configparser.ConfigParser()
     _Config.read('config.ini')
-    if _Config['AutoStr'][type+'Library']:
+    if _Config[section][type]:
         return True
     else:
         return False
     
+def getconfig(section:str,type:str):
+    _Config=configparser.ConfigParser()
+    _Config.read('config.ini')
+    return _Config[section][type]
 
 
 if __name__=='__main__':
