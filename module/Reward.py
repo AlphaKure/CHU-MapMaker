@@ -57,7 +57,7 @@ def Reward_M():
         #ticket
         if _iType==1:
             _sTicketId=input(Fore.GREEN+'[INFO]Enter id of ticket that you want to give:')
-            if checkconfig('Ticket'):
+            if checkconfig('AutoStr','Ticket'):
                 _fFInd,_sTicketStr=getstr('Ticket',_sTicketId)
                 if not _fFInd:
                     return
@@ -72,7 +72,7 @@ def Reward_M():
         #trophy
         if _iType==2:
             _sTrophyId=input(Fore.GREEN+'[INFO]Enter id of trophy that you want to give:')
-            if checkconfig('Trophy'):
+            if checkconfig('AutoStr','Trophy'):
                 _fFInd,_sTrophyStr=getstr('Trophy',_sTrophyId)
                 if not _fFInd:
                     return
@@ -88,7 +88,7 @@ def Reward_M():
         #chara
         if _iType==3:
             _sCharaId=input(Fore.GREEN+'[INFO]Enter id of chara that you want to give:')
-            if checkconfig('Chara'):
+            if checkconfig('AutoStr','Chara'):
                 _fFInd,_sCharaStr=getstr('Ticket',_sCharaId)
                 if not _fFInd:
                     return
@@ -104,7 +104,7 @@ def Reward_M():
         if _iType==4:
             _sSkillseedId=input(Fore.GREEN+'[INFO]Enter id of skillseed that you want to give:')
             _sSkillseedcount=input(Fore.GREEN+'[INFO]Enter count of skillseed that you want to give:')
-            if checkconfig('Skillseed'):
+            if checkconfig('AutoStr','Skillseed'):
                 _fFInd,_sSkillseedStr=getstr('Skillseed',_sSkillseedId)
                 if not _fFInd:
                     return
@@ -123,7 +123,7 @@ def Reward_M():
         #Nameplate
         if _iType==5:
             _sNameplateId=input(Fore.GREEN+'[INFO]Enter id of nameplate that you want to give:')
-            if checkconfig('Nameplate'):
+            if checkconfig('AutoStr','Nameplate'):
                 _fFInd,_sNameplateStr=getstr('Nameplate',_sNameplateId)
                 if not _fFInd:
                     return
@@ -138,7 +138,7 @@ def Reward_M():
         #Music
         if _iType==6:
             _sMusicId=input(Fore.GREEN+'[INFO]Enter id of music that you want to give:')
-            if checkconfig('Music'):
+            if checkconfig('AutoStr','Music'):
                 _fFInd,_sMusicStr=getstr('Music',_sMusicId)
                 if not _fFInd:
                     return
@@ -153,7 +153,7 @@ def Reward_M():
         #Mapicon
         if _iType==7:
             _sMapiconId=input(Fore.GREEN+'[INFO]Enter id of mapicon that you want to give:')
-            if checkconfig('Mapicon'):
+            if checkconfig('AutoStr','Mapicon'):
                 _fFInd,_sMapiconStr=getstr('Mapicon',_sMapiconId)
                 if not _fFInd:
                     return
@@ -168,7 +168,7 @@ def Reward_M():
         #Systemvoice
         if _iType==8:
             _sSystemvoiceId=input(Fore.GREEN+'[INFO]Enter id of systemvoice that you want to give:')
-            if checkconfig('Systemvoice'):
+            if checkconfig('AutoStr','Systemvoice'):
                 _fFInd,_sSystemvoiceStr=getstr('Systemvoice',_sSystemvoiceId)
                 if not _fFInd:
                     return
@@ -183,7 +183,7 @@ def Reward_M():
         #AvatarAccessory
         if _iType==9:
             _sAvatarAccessoryId=input(Fore.GREEN+'[INFO]Enter id of avataraccessory that you want to give:')
-            if checkconfig('Systemvoice'):
+            if checkconfig('AutoStr','AvatarAccessory'):
                 _fFInd,_sAvatarAccessoryStr=getstr('AvatarAccessory',_sAvatarAccessoryId)
                 if not _fFInd:
                     return
@@ -198,7 +198,7 @@ def Reward_M():
         #Frame
         if _iType==10:
             _sFrameId=input(Fore.GREEN+'[INFO]Enter id of frame that you want to give:')
-            if checkconfig('Frame'):
+            if checkconfig('AutoStr','Frame'):
                 _fFInd,_sFrameStr=getstr('Frame',_sFrameId)
                 if not _fFInd:
                     return
@@ -212,7 +212,18 @@ def Reward_M():
 
 
     print(_dXml.prettify()+Fore.RESET)
-    
+    if not checkconfig('SavePath','RewardPath'):
+        print(Fore.RED+'[ERROR] You didn\'t enter save path for reward!'+Fore.RESET)
+        os.system('PAUSE')
+        return
+    else:
+        _sSavePath=getconfig('SavePath','RewardPath')+'/reward'+_sRewardNum
+        if not os.path.isdir(_sSavePath):
+            os.mkdir(_sSavePath)
+        
+        with open(_sSavePath+'/Reward.xml','w',encoding='utf-8')as f:
+            f.write(str(_dXml))
+            f.close()
 
 if __name__=='__main__':
     Reward_M()
