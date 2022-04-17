@@ -1,6 +1,4 @@
 from bs4 import BeautifulSoup as BS
-import lxml
-import configparser
 from colorama import Fore
 
 from cross import *
@@ -211,7 +209,7 @@ def Reward_M():
         _dXml.RewardData.substances.list.RewardSubstanceData.append(_tFrame)
 
 
-    print(_dXml.prettify()+Fore.RESET)
+    #print(_dXml.prettify()+Fore.RESET)
     if not checkconfig('SavePath','RewardPath'):
         print(Fore.RED+'[ERROR] You didn\'t enter save path for reward!'+Fore.RESET)
         os.system('PAUSE')
@@ -225,5 +223,9 @@ def Reward_M():
             f.write(str(_dXml))
             f.close()
 
+        XMLFormat(_sSavePath+'/Reward.xml')
+        print(Fore.GREEN+'\nFinish!!!'+Fore.RESET)
+        os.system('PAUSE')
+        
 if __name__=='__main__':
     Reward_M()
