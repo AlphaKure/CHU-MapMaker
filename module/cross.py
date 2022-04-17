@@ -1,5 +1,7 @@
+from base64 import encode
+from encodings import utf_8
 from bs4 import BeautifulSoup as BS
-import lxml
+from lxml import etree
 import configparser
 import os
 
@@ -40,8 +42,10 @@ def getconfig(section:str,type:str):
     _Config.read('config.ini')
     return _Config[section][type]
 
+def XMLFormat(path:str):
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(path, parser)
+    tree.write(path, pretty_print=True,encoding='UTF-8')
 
-if __name__=='__main__':
-    getstr('Ticket')
     
     
