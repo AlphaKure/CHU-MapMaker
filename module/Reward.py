@@ -7,14 +7,21 @@ def Reward_M():
 
     #NEW xml data
     _dXml=tagM('')
+
     #add datatitle tag
+    _tXmlVer=tagM('<?xml version="1.0" encoding="utf-8"?>')
     _tDataTitle=tagM('<RewardData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></RewardData>')
+    _dXml.append(_tXmlVer)
     _dXml.append(_tDataTitle)
 
     #add dataname and name tags
     _sRewardNum=input(Fore.GREEN+'[INFO]Enter custom Rewardnum:')
     _sRewardStr=input(Fore.GREEN+'[INFO]Enter custom Rewardstr:')
     _tName=tagM('<name><id>'+_sRewardNum+'</id><str>'+_sRewardStr+'</str><data/></name>')
+    if len(_sRewardNum)>9:
+        print(Fore.RED+'[ERROR] Data number should be less than 9 digits!'+Fore.RESET)
+        os.system('PAUSE')
+        return
     while len(_sRewardNum)!=9:
         _sRewardNum='0'+_sRewardNum
     _tdataName=tagM('<dataName>reward'+_sRewardNum+'</dataName>')
@@ -56,7 +63,7 @@ def Reward_M():
         if _iType==1:
             _sTicketId=input(Fore.GREEN+'[INFO]Enter id of ticket that you want to give:')
             if checkconfig('AutoStr','Ticket'):
-                _fFInd,_sTicketStr=getstr('Ticket',_sTicketId)
+                _fFInd,_sTicketStr=getstr('name','AutoStr','Ticket',_sTicketId)
                 if not _fFInd:
                     return
             else:
@@ -71,7 +78,7 @@ def Reward_M():
         if _iType==2:
             _sTrophyId=input(Fore.GREEN+'[INFO]Enter id of trophy that you want to give:')
             if checkconfig('AutoStr','Trophy'):
-                _fFInd,_sTrophyStr=getstr('Trophy',_sTrophyId)
+                _fFInd,_sTrophyStr=getstr('name','AutoStr','Trophy',_sTrophyId)
                 if not _fFInd:
                     return
             else:
@@ -87,7 +94,7 @@ def Reward_M():
         if _iType==3:
             _sCharaId=input(Fore.GREEN+'[INFO]Enter id of chara that you want to give:')
             if checkconfig('AutoStr','Chara'):
-                _fFInd,_sCharaStr=getstr('Ticket',_sCharaId)
+                _fFInd,_sCharaStr=getstr('name','AutoStr','Chara',_sCharaId)
                 if not _fFInd:
                     return
             else:
@@ -102,8 +109,8 @@ def Reward_M():
         if _iType==4:
             _sSkillseedId=input(Fore.GREEN+'[INFO]Enter id of skillseed that you want to give:')
             _sSkillseedcount=input(Fore.GREEN+'[INFO]Enter count of skillseed that you want to give:')
-            if checkconfig('AutoStr','Skillseed'):
-                _fFInd,_sSkillseedStr=getstr('Skillseed',_sSkillseedId)
+            if checkconfig('AutoStr','Skill'):
+                _fFInd,_sSkillseedStr=getstr('name','AutoStr','Skill',_sSkillseedId)
                 if not _fFInd:
                     return
             else:
@@ -122,7 +129,7 @@ def Reward_M():
         if _iType==5:
             _sNameplateId=input(Fore.GREEN+'[INFO]Enter id of nameplate that you want to give:')
             if checkconfig('AutoStr','Nameplate'):
-                _fFInd,_sNameplateStr=getstr('Nameplate',_sNameplateId)
+                _fFInd,_sNameplateStr=getstr('name','AutoStr','Nameplate',_sNameplateId)
                 if not _fFInd:
                     return
             else:
@@ -137,7 +144,7 @@ def Reward_M():
         if _iType==6:
             _sMusicId=input(Fore.GREEN+'[INFO]Enter id of music that you want to give:')
             if checkconfig('AutoStr','Music'):
-                _fFInd,_sMusicStr=getstr('Music',_sMusicId)
+                _fFInd,_sMusicStr=getstr('name','AutoStr','Music',_sMusicId)
                 if not _fFInd:
                     return
             else:
@@ -152,7 +159,7 @@ def Reward_M():
         if _iType==7:
             _sMapiconId=input(Fore.GREEN+'[INFO]Enter id of mapicon that you want to give:')
             if checkconfig('AutoStr','Mapicon'):
-                _fFInd,_sMapiconStr=getstr('Mapicon',_sMapiconId)
+                _fFInd,_sMapiconStr=getstr('name','AutoStr','Mapicon',_sMapiconId)
                 if not _fFInd:
                     return
             else:
@@ -167,7 +174,7 @@ def Reward_M():
         if _iType==8:
             _sSystemvoiceId=input(Fore.GREEN+'[INFO]Enter id of systemvoice that you want to give:')
             if checkconfig('AutoStr','Systemvoice'):
-                _fFInd,_sSystemvoiceStr=getstr('Systemvoice',_sSystemvoiceId)
+                _fFInd,_sSystemvoiceStr=getstr('name','AutoStr','Systemvoice',_sSystemvoiceId)
                 if not _fFInd:
                     return
             else:
@@ -182,7 +189,7 @@ def Reward_M():
         if _iType==9:
             _sAvatarAccessoryId=input(Fore.GREEN+'[INFO]Enter id of avataraccessory that you want to give:')
             if checkconfig('AutoStr','AvatarAccessory'):
-                _fFInd,_sAvatarAccessoryStr=getstr('AvatarAccessory',_sAvatarAccessoryId)
+                _fFInd,_sAvatarAccessoryStr=getstr('name','AutoStr','AvatarAccessory',_sAvatarAccessoryId)
                 if not _fFInd:
                     return
             else:
@@ -197,7 +204,7 @@ def Reward_M():
         if _iType==10:
             _sFrameId=input(Fore.GREEN+'[INFO]Enter id of frame that you want to give:')
             if checkconfig('AutoStr','Frame'):
-                _fFInd,_sFrameStr=getstr('Frame',_sFrameId)
+                _fFInd,_sFrameStr=getstr('name','AutoStr','Frame',_sFrameId)
                 if not _fFInd:
                     return
             else:
