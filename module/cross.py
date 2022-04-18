@@ -9,13 +9,10 @@ def tagM(data:str):
     _tag=BS(data,'xml')
     return _tag
 
-def getstr(type:str,itemid:str):
-    '''
-    This is for reward
-    '''
+def getstr(findkey:str,section:str,type:str,itemid:str):
     _Config=configparser.ConfigParser()
     _Config.read('config.ini')
-    _LibraryPath=_Config['AutoStr'][type]
+    _LibraryPath=_Config[section][type]
     for _dir in os.listdir(_LibraryPath):
         if not os.path.isdir(_LibraryPath+'/'+_dir):
             continue
@@ -23,8 +20,8 @@ def getstr(type:str,itemid:str):
             with open(_LibraryPath+'/'+_dir+'/'+type+'.xml','r',encoding='utf-8')as f:
                 _dXml=BS(f.read(),'xml')
                 f.close()
-            if _dXml.find('name').id.string==itemid:
-                return True,_dXml.find('name').str.string
+            if _dXml.find(findkey).id.string==itemid:
+                return True,_dXml.find(findkey).str.string
     print(f'[ERROR]Not find {itemid}')
     os.system('pause')
     return False,' '
