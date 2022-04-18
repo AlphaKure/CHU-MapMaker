@@ -1,5 +1,3 @@
-from base64 import encode
-from encodings import utf_8
 from bs4 import BeautifulSoup as BS
 from lxml import etree
 import configparser
@@ -42,7 +40,7 @@ def getconfig(section:str,type:str):
 def XMLFormat(path:str):
     parser = etree.XMLParser(remove_blank_text=True)
     tree = etree.parse(path, parser)
-    tree.write(path, pretty_print=True,encoding='UTF-8')
+    tree.write(path, pretty_print=True,encoding='UTF-8',xml_declaration=True)
 
     
     
