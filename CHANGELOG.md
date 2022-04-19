@@ -7,3 +7,11 @@ Cross-讀取設定功能完成
 
 Reward-XML輸出功能完成
 Cross-XML格式化功能完成
+
+## 2022/04/19
+
+MapBonus-XML生成及輸出功能完成
+
+## 2022/04/20
+
+MapBonus-程式碼優化完成
