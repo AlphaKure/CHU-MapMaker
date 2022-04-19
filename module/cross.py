@@ -35,7 +35,11 @@ def checkconfig(section:str,type:str):
 def getconfig(section:str,type:str):
     _Config=configparser.ConfigParser()
     _Config.read('config.ini')
-    return _Config[section][type]
+    if section=='SavePath':
+        if _Config[section][type].endswith('/')or  _Config[section][type].endswith('\\'):
+            return  _Config[section][type][:-1]
+    return  _Config[section][type]
+
 
 def XMLFormat(path:str):
     parser = etree.XMLParser(remove_blank_text=True)
@@ -43,4 +47,6 @@ def XMLFormat(path:str):
     tree.write(path, pretty_print=True,encoding='UTF-8',xml_declaration=True)
 
     
-    
+def musicDif(id:int):
+    StrList=['Basic','Advanced','Expert','Master','Ultima','WorldsEnd']
+    return StrList[id]
