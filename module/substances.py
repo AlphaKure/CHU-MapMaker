@@ -52,4 +52,55 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
             return Tag
 
     elif FileType=='MapBonus':
-        pass
+        TagNameList=['chara','charaWorks','skill','skillCategory','music','musicGenre','musicWorks','musicDif','musicLv','']
+        FileNameList=['chara','chara','Skill','Skill','music','music','music','','','']
+        FindKeyList=['name','works','name','category','name','genreNames','worksName','','','']
+        if NowPart=='musicDif':
+            if Type==7:
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.')
+                Id=input(Fore.GREEN+f'[INFO]Enter Trigger musicDif Id(ex:Basic->0).')
+                Str=musicDif(int(Id))
+            else:
+                Point='1'
+                Id='-1'
+                Str='Invalid'
+            Tag=tagM('<'+NowPart+'><point>'+Point+'</point><'+NowPart+'Name><id>'+Id+'</id><str>'+Str+'</str><data /></'+NowPart+'Name></'+NowPart+'>')
+            return Tag
+        elif NowPart=='musicLv':
+            if Type==8:
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.')
+                Lv=input(Fore.GREEN+f'[INFO]Enter Trigger Lv (ex:14+->14+).')
+                if Lv.endswith('+'):
+                    Id=str(int(Lv[:-1])*2)
+                    Str='ID_'+str(Id)
+                    Data='Lv'+str(Lv)+'+'
+                else:
+                    Id=str(int(Lv)*2-1)
+                    Str='ID_'+str(Id)
+                    Data='Lv'+Lv
+            else:
+                Point='1'
+                Id='-1'
+                Str='Invalid'
+                Data=''
+            Tag=tagM('<'+NowPart+'><point>'+Point+'</point><filterLv><id>'+Id+'</id><str>'+Str+'</str><data>'+Data+'</data></filterLv></'+NowPart+'>')
+            return Tag
+
+
+
+        else:
+            if NowPart==TagNameList[Type]:
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.')
+                Id=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Id.')
+                if checkconfig('AutoStr',FileNameList[Type]):
+                    _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
+                    if not _fFind:
+                        return
+                else:
+                    Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.')
+            else:
+                Point='1'
+                Id='-1'
+                Str='Invalid'
+            Tag=tagM('<'+NowPart+'><point>'+Point+'</point><'+NowPart+'Name><id>'+Id+'</id><str>'+Str+'</str><data /></'+NowPart+'Name></'+NowPart+'>')
+            return Tag
