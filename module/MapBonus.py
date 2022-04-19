@@ -37,123 +37,77 @@ def MapBonusM():
     for i in range(0,4):
         _tMapBonusSubstanceData=tagM('<MapBonusSubstanceData><type>'+str(i*10)+'</type></MapBonusSubstanceData>')
         _dXml.MapBonusData.substances.list.append(_tMapBonusSubstanceData)
-        
+
     _iCount=0
     _fFinish=False
-    while _iCount<4 and not _fFinish:
-        for NowTag in _dXml.find_all('MapBonusSubstanceData'):
-            if NowTag.type.string!=str(_iCount*10):
-                continue
+    for NowTag in _dXml.find_all('MapBonusSubstanceData'):
+        if not _fFinish:
+            #choose 1 type of trigger
+            print(Fore.RED+f'\n[WARNING]You can set up to 4 Bonuses, you have currently set {_iCount}.'+Fore.RESET)
+            print(Fore.GREEN+'\n[INFO]What kind of bonus condiction that you want to add?')
+            print(Fore.WHITE+'[0]Enter 0: chara')
+            print(Fore.WHITE+'[1]Enter 1: charawork')
+            print(Fore.WHITE+'[2]Enter 2: skill')
+            print(Fore.WHITE+'[3]Enter 3: skillCategory')
+            print(Fore.WHITE+'[4]Enter 4: music')
+            print(Fore.WHITE+'[5]Enter 5: musicGenre')
+            print(Fore.WHITE+'[6]Enter 6: musicWorks')
+            print(Fore.WHITE+'[7]Enter 7: musicDif')
+            print(Fore.WHITE+'[8]Enter 8: musicLv')
+            print(Fore.RED+'[9]Enter 9: Finish!'+Fore.RESET)
+            _iType=int(input(Fore.GREEN+'>'))
+            if _iType>9:
+                print(Fore.RED+'[ERROR] Out of range!'+Fore.RESET)
+                return
+            elif _iType==9:
+                _fFinish=True
+                NowTag.decompose()
             else:
-                if not _fFinish:
-                    #choose 1 type of trigger
-                    print(Fore.RED+f'\n[WARNING]You can set up to 4 Bonuses, you have currently set {_iCount}.'+Fore.RESET)
-                    print(Fore.GREEN+'\n[INFO]What kind of bonus condiction that you want to add?')
-                    print(Fore.WHITE+'[0]Enter 0: chara')
-                    print(Fore.WHITE+'[1]Enter 1: charawork')
-                    print(Fore.WHITE+'[2]Enter 2: skill')
-                    print(Fore.WHITE+'[3]Enter 3: skillCategory')
-                    print(Fore.WHITE+'[4]Enter 4: music')
-                    print(Fore.WHITE+'[5]Enter 5: musicGenre')
-                    print(Fore.WHITE+'[6]Enter 6: musicWorks')
-                    print(Fore.WHITE+'[7]Enter 7: musicDif')
-                    print(Fore.WHITE+'[8]Enter 8: musicLv')
-                    print(Fore.RED+'[9]Enter 9: Finish!'+Fore.RESET)
-                    _iType=int(input(Fore.GREEN+'>'))
-                    if _iType>9:
-                        print(Fore.RED+'[ERROR] Out of range!'+Fore.RESET)
-                        return
-                    else:
-                        print(Fore.RED+'\n[WARNING]This tool is ONLY add for offical data. If you want to add custom data likes ddsMap or chara, etc. Please add custom data by yourself.'+Fore.RESET)
-                        #將type轉為正確值
-                        NowTag.type.string=str(_iType)
+                print(Fore.RED+'\n[WARNING]This tool is ONLY add for offical data. If you want to add custom data likes ddsMap or chara, etc. Please add custom data by yourself.'+Fore.RESET)
+                #將type轉為正確值
+                NowTag.type.string=str(_iType)
             
-                        #chara
-                        _tChara=SubstanceTagMaker('MapBonus','chara',_iType)
-                        NowTag.append(_tChara)
+                #chara
+                _tChara=SubstanceTagMaker('MapBonus','chara',_iType)
+                NowTag.append(_tChara)
 
-                        #charaWorks
-                        _tCharaWorks=SubstanceTagMaker('MapBonus','charaWorks',_iType)
-                        NowTag.append(_tCharaWorks)
+                #charaWorks
+                _tCharaWorks=SubstanceTagMaker('MapBonus','charaWorks',_iType)
+                NowTag.append(_tCharaWorks)
 
-                        #skill
-                        _tSkill=SubstanceTagMaker('MapBonus','skill',_iType)
-                        NowTag.append(_tSkill)
+                #skill
+                _tSkill=SubstanceTagMaker('MapBonus','skill',_iType)
+                NowTag.append(_tSkill)
 
-                        #skillCategory
-                        _tSkillCategory=SubstanceTagMaker('MapBonus','skillCategory',_iType)
-                        NowTag.append(_tSkillCategory)
+                #skillCategory
+                _tSkillCategory=SubstanceTagMaker('MapBonus','skillCategory',_iType)
+                NowTag.append(_tSkillCategory)
 
-                        #music
-                        _tMusic=SubstanceTagMaker('MapBonus','music',_iType)
-                        NowTag.append(_tMusic)
+                #music
+                _tMusic=SubstanceTagMaker('MapBonus','music',_iType)
+                NowTag.append(_tMusic)
 
-                        #musicGenre
-                        _tMusicGenre=SubstanceTagMaker('MapBonus','musicGenre',_iType)
-                        NowTag.append(_tMusicGenre)
+                #musicGenre
+                _tMusicGenre=SubstanceTagMaker('MapBonus','musicGenre',_iType)
+                NowTag.append(_tMusicGenre)
 
-                        #musicWorks
-                        _tMusicWorks=SubstanceTagMaker('MapBonus','musicWorks',_iType)
-                        NowTag.append(_tMusicWorks)
+                #musicWorks
+                _tMusicWorks=SubstanceTagMaker('MapBonus','musicWorks',_iType)
+                NowTag.append(_tMusicWorks)
 
-                        #musicDif
-                        _tMusicDif=SubstanceTagMaker('MapBonus','musicDif',_iType)
-                        NowTag.append(_tMusicDif)
+                #musicDif
+                _tMusicDif=SubstanceTagMaker('MapBonus','musicDif',_iType)
+                NowTag.append(_tMusicDif)
 
-                        #musicLv
-                        _tMusicLv=SubstanceTagMaker('MapBonus','musicLv',_iType)
-                        NowTag.append(_tMusicLv)
-
-                        #判斷結束沒
-                        if _iType==9:
-                            NowTag.type.string='1'
-                            _fFinish=True
-                            if _iCount==4:
-                                break
+                #musicLv
+                _tMusicLv=SubstanceTagMaker('MapBonus','musicLv',_iType)
+                NowTag.append(_tMusicLv)
                 
-                #補上空MapBonusSubstancesData
-                else:
-                    NowTag.type.string='1'
-            
-                    #chara
-                    _tChara=SubstanceTagMaker('MapBonus','chara',9)
-                    NowTag.append(_tChara)
+        #多餘刪除
+        else:
+            NowTag.decompose()
 
-                    #charaWorks
-                    _tCharaWorks=SubstanceTagMaker('MapBonus','charaWorks',9)
-                    NowTag.append(_tCharaWorks)
-
-                    #skill
-                    _tSkill=SubstanceTagMaker('MapBonus','skill',9)
-                    NowTag.append(_tSkill)
-
-                    #skillCategory
-                    _tSkillCategory=SubstanceTagMaker('MapBonus','skillCategory',9)
-                    NowTag.append(_tSkillCategory)
-
-                    #music
-                    _tMusic=SubstanceTagMaker('MapBonus','music',9)
-                    NowTag.append(_tMusic)
-
-                    #musicGenre
-                    _tMusicGenre=SubstanceTagMaker('MapBonus','musicGenre',9)
-                    NowTag.append(_tMusicGenre)
-
-                    #musicWorks
-                    _tMusicWorks=SubstanceTagMaker('MapBonus','musicWorks',9)
-                    NowTag.append(_tMusicWorks)
-
-                    #musicDif
-                    _tMusicDif=SubstanceTagMaker('MapBonus','musicDif',9)
-                    NowTag.append(_tMusicDif)
-
-                    #musicLv
-                    _tMusicLv=SubstanceTagMaker('MapBonus','musicLv',9)
-                    NowTag.append(_tMusicLv)
-                    
-                        
-
-            _iCount=_iCount+1
+        _iCount=_iCount+1
 
     #print(_dXml.prettify())
     if not checkconfig('SavePath','MapBonusPath'):
