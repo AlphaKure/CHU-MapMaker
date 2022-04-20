@@ -21,7 +21,7 @@ def MapBonusM():
     _sMapBonusStr=input(Fore.GREEN+'[INFO]Enter custom MapBonusstr:')
     _tName=tagM('<name><id>'+_sMapBonusNum+'</id><str>'+_sMapBonusStr+'</str><data/></name>')
     if len(_sMapBonusNum)>8:
-        print(Fore.RED+'[ERROR] Data number should be less than 9 digits!'+Fore.RESET)
+        print(Fore.RED+'[ERROR] Data number should be less than 8 digits!'+Fore.RESET)
         os.system('PAUSE')
         return
     while len(_sMapBonusNum)!=8:
