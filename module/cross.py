@@ -44,7 +44,7 @@ def getconfig(section:str,type:str):
 def XMLFormat(path:str):
     parser = etree.XMLParser(remove_blank_text=True)
     tree = etree.parse(path, parser)
-    tree.write(path, pretty_print=True,encoding='UTF-8',xml_declaration=True)
+    tree.write(path, pretty_print=True,encoding='utf-8',xml_declaration=True)
 
     
 def musicDif(id:int):
