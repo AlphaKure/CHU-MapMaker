@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup as BS
+from colorama import Fore
 from lxml import etree
 import configparser
 import os
@@ -20,7 +21,7 @@ def getstr(findkey:str,section:str,type:str,itemid:str):
                 f.close()
             if _dXml.find(findkey).id.string==itemid:
                 return True,_dXml.find(findkey).str.string
-    print(f'[ERROR]Not find {itemid}')
+    print(Fore.RED+f'[ERROR]Not find {itemid}'+Fore.RESET)
     os.system('pause')
     return False,' '
 
