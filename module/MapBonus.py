@@ -17,8 +17,8 @@ def MapBonusM():
     _dXml.append(_tDataTitle)
 
     #add dataname and name tags
-    _sMapBonusNum=input(Fore.GREEN+'[INFO]Enter custom MapBonusnum:')
-    _sMapBonusStr=input(Fore.GREEN+'[INFO]Enter custom MapBonusstr:')
+    _sMapBonusNum=input(Fore.GREEN+'[INFO]Enter custom MapBonusnum:'+Fore.RESET)
+    _sMapBonusStr=input(Fore.GREEN+'[INFO]Enter custom MapBonusstr:'+Fore.RESET)
     _tName=tagM('<name><id>'+_sMapBonusNum+'</id><str>'+_sMapBonusStr+'</str><data/></name>')
     if len(_sMapBonusNum)>8:
         print(Fore.RED+'[ERROR] Data number should be less than 8 digits!'+Fore.RESET)
@@ -55,7 +55,7 @@ def MapBonusM():
             print(Fore.WHITE+'[7]Enter 7: musicDif')
             print(Fore.WHITE+'[8]Enter 8: musicLv')
             print(Fore.RED+'[9]Enter 9: Finish!'+Fore.RESET)
-            _iType=int(input(Fore.GREEN+'>'))
+            _iType=int(input(Fore.GREEN+'>'++Fore.RESET))
             if _iType>9:
                 print(Fore.RED+'[ERROR] Out of range!'+Fore.RESET)
                 return

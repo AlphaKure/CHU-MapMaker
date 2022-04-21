@@ -10,7 +10,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
         #gamePoint-reward
         if NowPart=='gamePoint':
             if Type==0:
-                _sAmount=input(Fore.GREEN+'[INFO]Enter amount of gamePoint that you want to add:')
+                _sAmount=input(Fore.GREEN+'[INFO]Enter amount of gamePoint that you want to add:'+Fore.RESET)
             else:
                 _sAmount='0'
             _tGamepoint=tagM('<gamePoint><gamePoint>'+_sAmount+'</gamePoint></gamePoint>')
@@ -19,14 +19,14 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
         #skillSeed-reward
         elif NowPart=='skillSeed':
             if Type==4:
-                _sSkillseedId=input(Fore.GREEN+'[INFO]Enter id of skillseed that you want to give:')
-                _sSkillseedcount=input(Fore.GREEN+'[INFO]Enter count of skillseed that you want to give:')
+                _sSkillseedId=input(Fore.GREEN+'[INFO]Enter id of skillseed that you want to give:'+Fore.RESET)
+                _sSkillseedcount=input(Fore.GREEN+'[INFO]Enter count of skillseed that you want to give:'+Fore.RESET)
                 if checkconfig('AutoStr','Skill'):
                     _fFInd,_sSkillseedStr=getstr('name','AutoStr','Skill',_sSkillseedId)
                     if not _fFInd:
                         return
                 else:
-                    _sSkillseedStr=input(Fore.GREEN+'[INFO]Enter str of skillseed that you want to give:')
+                    _sSkillseedStr=input(Fore.GREEN+'[INFO]Enter str of skillseed that you want to give:'+Fore.RESET)
             else:
                 _sSkillseedId='-1'
                 _sSkillseedStr='Invalid'
@@ -38,13 +38,13 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
         #Other-reward 公版    
         else:
             if NowPart==TagNameList[Type]:
-                Id=input(Fore.GREEN+f'[INFO]Enter id of {TagNameList[Type]} that you want to give:')
+                Id=input(Fore.GREEN+f'[INFO]Enter id of {TagNameList[Type]} that you want to give:'+Fore.RESET)
                 if checkconfig('AutoStr',TagNameList[Type]):
                     _fFInd,Str=getstr('name','AutoStr',TagNameList[Type],Id)
                     if not _fFInd:
                         return
                 else:
-                    Str=input(Fore.GREEN+f'[INFO]Enter str of {TagNameList[Type]} that you want to give:')
+                    Str=input(Fore.GREEN+f'[INFO]Enter str of {TagNameList[Type]} that you want to give:'+Fore.RESET)
             else:
                 Id='-1'
                 Str='Invalid'
@@ -57,8 +57,8 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
         FindKeyList=['name','works','name','category','name','genreNames','worksName','','','']
         if NowPart=='musicDif':
             if Type==7:
-                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.')
-                Id=input(Fore.GREEN+f'[INFO]Enter Trigger musicDif Id(ex:Basic->0).')
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
+                Id=input(Fore.GREEN+f'[INFO]Enter Trigger musicDif Id(ex:Basic->0).'+Fore.RESET)
                 Str=musicDif(int(Id))
             else:
                 Point='1'
@@ -68,8 +68,8 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
             return Tag
         elif NowPart=='musicLv':
             if Type==8:
-                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.')
-                Lv=input(Fore.GREEN+f'[INFO]Enter Trigger Lv (ex:14+->14+).')
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
+                Lv=input(Fore.GREEN+f'[INFO]Enter Trigger Lv (ex:14+->14+).'+Fore.RESET)
                 if Lv.endswith('+'):
                     Id=str(int(Lv[:-1])*2)
                     Str='ID_'+str(Id)
@@ -90,14 +90,14 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
 
         else:
             if NowPart==TagNameList[Type]:
-                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.')
-                Id=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Id.')
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
+                Id=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Id.'+Fore.RESET)
                 if checkconfig('AutoStr',FileNameList[Type]):
                     _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
                     if not _fFind:
                         return
                 else:
-                    Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.')
+                    Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.'+Fore.RESET)
             else:
                 Point='1'
                 Id='-1'

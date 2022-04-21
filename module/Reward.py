@@ -16,8 +16,8 @@ def Reward_M():
     _dXml.append(_tDataTitle)
 
     #add dataname and name tags
-    _sRewardNum=input(Fore.GREEN+'[INFO]Enter custom Rewardnum:')
-    _sRewardStr=input(Fore.GREEN+'[INFO]Enter custom Rewardstr:')
+    _sRewardNum=input(Fore.GREEN+'[INFO]Enter custom Rewardnum:'+Fore.RESET)
+    _sRewardStr=input(Fore.GREEN+'[INFO]Enter custom Rewardstr:'+Fore.RESET)
     _tName=tagM('<name><id>'+_sRewardNum+'</id><str>'+_sRewardStr+'</str><data/></name>')
     if len(_sRewardNum)>9:
         print(Fore.RED+'[ERROR] Data number should be less than 9 digits!'+Fore.RESET)
@@ -42,7 +42,7 @@ def Reward_M():
     print(Fore.WHITE+'[8]Enter 8: systemvoice')
     print(Fore.WHITE+'[9]Enter 9: avatarAccessory')
     print(Fore.WHITE+'[10]Enter 10: frame')
-    _iType=int(input(Fore.GREEN+'>'))
+    _iType=int(input(Fore.GREEN+'>'+Fore.RESET))
     if _iType>10:
         print(Fore.RED+'[ERROR] Out of range!'+Fore.RESET)
         return
