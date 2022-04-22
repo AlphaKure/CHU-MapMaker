@@ -86,8 +86,6 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
             Tag=tagM('<'+NowPart+'><point>'+Point+'</point><filterLv><id>'+Id+'</id><str>'+Str+'</str><data>'+Data+'</data></filterLv></'+NowPart+'>')
             return Tag
 
-
-
         else:
             if NowPart==TagNameList[Type]:
                 Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
@@ -104,3 +102,33 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
                 Str='Invalid'
             Tag=tagM('<'+NowPart+'><point>'+Point+'</point><'+NowPart+'Name><id>'+Id+'</id><str>'+Str+'</str><data /></'+NowPart+'Name></'+NowPart+'>')
             return Tag
+    elif FileType=='Map':
+        if NowPart=='music':
+            _sCourseMusic=input(Fore.GREEN+'[INFO]Do you want to add 課題曲 in this area?(y/n)'+Fore.RESET).lower()
+            if _sCourseMusic=='n':
+                Id='-1'
+                Str='Invalid'
+                isHard='false'
+            else:
+                Id=input(Fore.GREEN+'[INFO]Enter the ID of music:'+Fore.RESET)
+                if checkconfig('AutoStr','music'):
+                    _fFInd,Str=getstr('name','AutoStr','music',Id)
+                    if not _fFInd:
+                        return
+                else:
+                    Str=input(Fore.GREEN+'[INFO]Enter the Str of music:'+Fore.RESET)
+                    isHard=input(Fore.GREEN+'[INFO]Limit 課題曲 to Master mode only?(y/n)'+Fore.RESET).lower()
+                    if isHard=='y':
+                        isHard='true'
+                    else:
+                        isHard='false'
+            return isHard,tagM('<'+NowPart+'Name><id>'+Id+'</id><str>'+Str+'</str><data /></'+NowPart+'Name>')
+        else:
+            Id=input(Fore.GREEN+f'[INFO]Enter the ID of {NowPart}:'+Fore.RESET)
+            if checkconfig('AutoStr',NowPart):
+                _fFInd,Str=getstr('name','AutoStr',NowPart,Id)
+                if not _fFInd:
+                    return
+            else:
+                Str=input(Fore.GREEN+f'[INFO]Enter the Str of {NowPart}:'+Fore.RESET)
+            return tagM('<'+NowPart+'Name><id>'+Id+'</id><str>'+Str+'</str><data /></'+NowPart+'Name>')

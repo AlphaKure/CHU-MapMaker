@@ -51,3 +51,22 @@ def XMLFormat(path:str):
 def musicDif(id:int):
     StrList=['Basic','Advanced','Expert','Master','Ultima','WorldsEnd']
     return StrList[id]
+
+def mapFilter(id:str):
+    if id=='0':
+        NewFilterStr='Collaboration'
+        NewFilterData='イベント'
+    elif id=='1':
+        NewFilterStr='Current'
+        NewFilterData='現行バージョン'
+    elif id=='2':
+        NewFilterStr='Sega'
+        NewFilterData='ゲキチュウマイ'
+    elif id=='3':
+        NewFilterStr='Other'
+        NewFilterData='過去バージョン'
+    else:
+        print(Fore.RED+'[ERROR]ID ERROR!'+Fore.RESET)
+        os.system('pause')
+        return
+    return NewFilterStr,NewFilterData
