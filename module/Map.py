@@ -58,9 +58,6 @@ def MapM():
     #add infos tag
     _dXml.MapData.append(tagM('<infos></infos>'))
 
-    _iIndex=0 
-    _iPage=0
-
     #add MapDataAreaInfo 
     while True:
         _tMapDataAreaInfo=tagM('<MapDataAreaInfo></MapDataAreaInfo>')
@@ -84,8 +81,10 @@ def MapM():
         _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<isHard>'+_sIsHard+'</isHard>'))
 
         #Page and index
-        _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<pageIndex>'+str(_iPage)+'</pageIndex>'))
-        _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<indexInPage>'+str(_iIndex)+'</indexInPage>'))
+        _sPage=input(Fore.GREEN+'[INFO]Enter this mapArea Page.'+Fore.RESET)
+        _sIndex=input(Fore.GREEN+'[INFO]Enter this mapArea Index in that page.'+Fore.RESET)
+        _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<pageIndex>'+_sPage+'</pageIndex>'))
+        _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<indexInPage>'+_sIndex+'</indexInPage>'))
 
         #requiredAchievementCount
         _sRequiredAchievementCount=input(Fore.GREEN+'[INFO]Required Achievement Count.(Not enable enter->0)'+Fore.RESET)
@@ -100,11 +99,6 @@ def MapM():
         if input(Fore.GREEN+'Continue add MapAreaInfo?(y/n)'+Fore.RESET).lower()=='n':
             break
 
-        if _iIndex!=8:
-            _iIndex+=1
-        else:
-            _iIndex=0
-            _iPage+=1
 
     #print(_dXml.prettify())
     if not checkconfig('SavePath','MapPath'):
