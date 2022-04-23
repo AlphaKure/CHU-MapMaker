@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup as BS
 from colorama import Fore
 
 from cross import *

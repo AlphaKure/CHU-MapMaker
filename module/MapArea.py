@@ -12,9 +12,6 @@ def MapAreaM():
     _dXml.append(_tXmlVer)
     _dXml.append(_tTitle)
 
-    #netOpenName
-
-
     #add dataname ,name and netOpenName tags
     _tNetOpenName=tagM('<netOpenName><id>2100</id><str>v2_05 00_0</str><data /></netOpenName>')
     _sMapAreaNum=input(Fore.GREEN+'[INFO]Enter custom MapAreanum:'+Fore.RESET)
