@@ -54,7 +54,7 @@ def MapBonusM():
             print(Fore.WHITE+'[7]Enter 7: musicDif')
             print(Fore.WHITE+'[8]Enter 8: musicLv')
             print(Fore.RED+'[9]Enter 9: Finish!'+Fore.RESET)
-            _iType=int(input(Fore.GREEN+'>'++Fore.RESET))
+            _iType=int(input(Fore.GREEN+'>'+Fore.RESET))
             if _iType>9:
                 print(Fore.RED+'[ERROR] Out of range!'+Fore.RESET)
                 return
