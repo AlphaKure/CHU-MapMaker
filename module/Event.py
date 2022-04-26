@@ -55,7 +55,7 @@ def EventM():
     #substances tag
     _sMapId=input(Fore.GREEN+'[INFO]Enter id of map:'+Fore.RESET)
     if checkconfig('AutoStr','map'):
-        _fFInd,_sMapStr=getstr('name','AutoStr','map',_sDdsBannerId)
+        _fFInd,_sMapStr=getstr('name','AutoStr','map',_sMapId)
         if not _fFInd:
             return
     else:
