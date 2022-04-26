@@ -3,6 +3,8 @@ from colorama import Fore
 from cross import *
 
 def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
+    #Type為使用者選擇的值，假設使用者選擇5，為了生成其他選項的空值TAG，假設到6的地方由於輸入Type不同，即可自行生成空值TAG
+
     #Reward substances
     if FileType=='Reward':
         TagNameList=['','ticket','trophy','chara','','namePlate','music','mapIcon','systemVoice','avatarAccessory','frame'] #不讓gamePoint skillSeed 碰撞
@@ -52,9 +54,9 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
             return Tag
 
     elif FileType=='MapBonus':
-        TagNameList=['chara','charaWorks','skill','skillCategory','music','musicGenre','musicWorks','musicDif','musicLv','']
-        FileNameList=['chara','chara','Skill','Skill','music','music','music','','','']
-        FindKeyList=['name','works','name','category','name','genreNames','worksName','','','']
+        TagNameList=['chara','charaWorks','skill','skillCategory','music','musicGenre','musicWorks','musicDif','musicLv']
+        FileNameList=['chara','chara','Skill','Skill','music','music','music','','']
+        FindKeyList=['name','works','name','category','name','genreNames','worksName','','']
         if NowPart=='musicDif':
             if Type==7:
                 Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
@@ -64,7 +66,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
                 Point='1'
                 Id='-1'
                 Str='Invalid'
-            Tag=tagM('<'+NowPart+'><point>'+Point+'</point><'+NowPart+'Name><id>'+Id+'</id><str>'+Str+'</str><data /></'+NowPart+'Name></'+NowPart+'>')
+            Tag=tagM('<'+NowPart+'><point>'+Point+'</point><musicDif><id>'+Id+'</id><str>'+Str+'</str><data /></musicDif></'+NowPart+'>')
             return Tag
         elif NowPart=='musicLv':
             if Type==8:
@@ -85,7 +87,57 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
                 Data=''
             Tag=tagM('<'+NowPart+'><point>'+Point+'</point><filterLv><id>'+Id+'</id><str>'+Str+'</str><data>'+Data+'</data></filterLv></'+NowPart+'>')
             return Tag
+        elif NowPart=='skillCategory':
+            if Type==3:
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
+                Id=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Id.'+Fore.RESET)
+                if checkconfig('AutoStr',FileNameList[Type]):
+                    _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
+                    if not _fFind:
+                        return
+                else:
+                    Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.'+Fore.RESET)
+            else:
+                Point='1'
+                Id='-1'
+                Str='Invalid'
+            Tag=tagM('<'+NowPart+'><point>'+Point+'</point><skillCategory><id>'+Id+'</id><str>'+Str+'</str><data /></skillCategory></'+NowPart+'>')
+            return Tag
+        
+        elif NowPart=='musicGenre':
+            if Type==5:
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
+                Id=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Id.'+Fore.RESET)
+                if checkconfig('AutoStr',FileNameList[Type]):
+                    _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
+                    if not _fFind:
+                        return
+                else:
+                    Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.'+Fore.RESET)
+            else:
+                Point='1'
+                Id='-1'
+                Str='Invalid'
+            Tag=tagM('<'+NowPart+'><point>'+Point+'</point><genreName><id>'+Id+'</id><str>'+Str+'</str><data /></genreName></'+NowPart+'>')
+            return Tag
 
+        elif NowPart=='musicWorks':
+            if Type==6:
+                Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
+                Id=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Id.'+Fore.RESET)
+                if checkconfig('AutoStr',FileNameList[Type]):
+                    _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
+                    if not _fFind:
+                        return
+                else:
+                    Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.'+Fore.RESET)
+            else:
+                Point='1'
+                Id='-1'
+                Str='Invalid'
+            Tag=tagM('<'+NowPart+'><point>'+Point+'</point><worksName><id>'+Id+'</id><str>'+Str+'</str><data /></worksName></'+NowPart+'>')
+            return Tag
+        
         else:
             if NowPart==TagNameList[Type]:
                 Point=input(Fore.GREEN+'[INFO]Enter how many bonus step you want to give.'+Fore.RESET)
