@@ -4,6 +4,19 @@ from lxml import etree
 import configparser
 import os
 
+def PathChk():
+    nowpath=os.getcwd().lower()
+    if not 'chu-mapmaker' in nowpath:
+        print(Fore.RED+'[ERROR]System Path Error!'+Fore.RESET)
+        os.system('pause')
+        return False
+    if nowpath.endswith('\module'):
+        os.chdir(nowpath[:-7])
+    return True
+
+
+
+#我超懶
 def tagM(data:str):
     _tag=BS(data,'xml')
     return _tag
