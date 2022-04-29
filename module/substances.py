@@ -74,11 +74,11 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int):
                 Lv=input(Fore.GREEN+f'[INFO]Enter Trigger Lv (ex:14+->14+).'+Fore.RESET)
                 if Lv.endswith('+'):
                     Id=str(int(Lv[:-1])*2)
-                    Str='ID_'+str(Id)
-                    Data='Lv'+str(Lv)+'+'
+                    Str='ID_'+Id
+                    Data='Lv'+Lv
                 else:
                     Id=str(int(Lv)*2-1)
-                    Str='ID_'+str(Id)
+                    Str='ID_'+Id
                     Data='Lv'+Lv
             else:
                 Point='1'
