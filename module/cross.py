@@ -1,27 +1,26 @@
+from typing import Tuple
 from bs4 import BeautifulSoup as BS
 from colorama import Fore
 from lxml import etree
 import configparser
 import os
 
-def PathChk():
-    nowpath=os.getcwd().lower()
-    if not 'chu-mapmaker' in nowpath:
+def PathChk()->bool:
+    _NowPath=os.getcwd().lower()
+    if not 'chu-mapmaker' in _NowPath:
         print(Fore.RED+'[ERROR]System Path Error!'+Fore.RESET)
         os.system('pause')
         return False
-    if nowpath.endswith('\module'):
-        os.chdir(nowpath[:-7])
+    if _NowPath.endswith('\module'):
+        os.chdir(_NowPath[:-7])
     return True
 
-
-
 #我超懶
-def tagM(data:str):
-    _tag=BS(data,'xml')
-    return _tag
+def tagM(data:str)->BS:
+    _Tag=BS(data,'xml')
+    return _Tag
 
-def getstr(findkey:str,section:str,type:str,itemid:str):
+def getstr(findkey:str,section:str,type:str,itemid:str)->Tuple[bool,str]:
     _Config=configparser.ConfigParser()
     _Config.read('config.ini')
     _LibraryPath=_Config[section][type]
@@ -38,7 +37,7 @@ def getstr(findkey:str,section:str,type:str,itemid:str):
     os.system('pause')
     return False,' '
 
-def checkconfig(section:str,type:str):
+def checkconfig(section:str,type:str)->bool:
     _Config=configparser.ConfigParser()
     _Config.read('config.ini')
     if _Config[section][type]:
@@ -46,7 +45,7 @@ def checkconfig(section:str,type:str):
     else:
         return False
     
-def getconfig(section:str,type:str):
+def getconfig(section:str,type:str)->str:
     _Config=configparser.ConfigParser()
     _Config.read('config.ini')
     if section=='SavePath':
@@ -55,17 +54,17 @@ def getconfig(section:str,type:str):
     return  _Config[section][type]
 
 
-def XMLFormat(path:str):
+def XMLFormat(path:str)->None:
     parser = etree.XMLParser(remove_blank_text=True)
     tree = etree.parse(path, parser)
     tree.write(path, pretty_print=True,encoding='utf-8',xml_declaration=True)
 
     
-def musicDif(id:int):
+def musicDif(id:int)->str:
     StrList=['Basic','Advanced','Expert','Master','Ultima','WorldsEnd']
     return StrList[id]
 
-def mapFilter(id:str):
+def mapFilter(id:str)->Tuple[str,str]:
     if id=='0':
         NewFilterStr='Collaboration'
         NewFilterData='イベント'

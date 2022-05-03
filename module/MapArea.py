@@ -1,7 +1,7 @@
 from colorama import Fore
 from cross import *
 
-os.system('cls')#避免colorama錯誤
+os.system('cls') #避免colorama錯誤
 
 def MapAreaM():
     if not checkconfig('SavePath','MapAreaPath'):

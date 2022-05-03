@@ -2,7 +2,7 @@ from colorama import Fore
 
 from cross import *
 
-os.system('cls')#避免colorama錯誤
+os.system('cls') #避免colorama錯誤
 
 def EventM():
 

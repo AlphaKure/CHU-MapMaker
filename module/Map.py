@@ -3,7 +3,7 @@ from colorama import Fore
 from cross import *
 from substances import *
 
-os.system('cls')#避免colorama錯誤
+os.system('cls') #避免colorama錯誤
 
 def MapM():
     if not checkconfig('SavePath','MapPath'):
