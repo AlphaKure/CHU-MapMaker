@@ -27,7 +27,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
                 if checkconfig('AutoStr','Skill'):
                     _fFInd,_sSkillseedStr=getstr('name','AutoStr','Skill',_sSkillseedId)
                     if not _fFInd:
-                        return
+                        return SubstanceTagMaker(FileType,NowPart,Type)
                 else:
                     _sSkillseedStr=input(Fore.GREEN+'[INFO]Enter str of skillseed that you want to give:'+Fore.RESET)
             else:
@@ -45,7 +45,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
                 if checkconfig('AutoStr',TagNameList[Type]):
                     _fFInd,Str=getstr('name','AutoStr',TagNameList[Type],Id)
                     if not _fFInd:
-                        return
+                        return SubstanceTagMaker(FileType,NowPart,Type)
                 else:
                     Str=input(Fore.GREEN+f'[INFO]Enter str of {TagNameList[Type]} that you want to give:'+Fore.RESET)
             else:
@@ -95,7 +95,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
                 if checkconfig('AutoStr',FileNameList[Type]):
                     _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
                     if not _fFind:
-                        return
+                        return SubstanceTagMaker(FileType,NowPart,Type)
                 else:
                     Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.'+Fore.RESET)
             else:
@@ -112,7 +112,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
                 if checkconfig('AutoStr',FileNameList[Type]):
                     _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
                     if not _fFind:
-                        return
+                        return SubstanceTagMaker(FileType,NowPart,Type)
                 else:
                     Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.'+Fore.RESET)
             else:
@@ -129,7 +129,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
                 if checkconfig('AutoStr',FileNameList[Type]):
                     _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
                     if not _fFind:
-                        return
+                        return SubstanceTagMaker(FileType,NowPart,Type)
                 else:
                     Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.'+Fore.RESET)
             else:
@@ -146,7 +146,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
                 if checkconfig('AutoStr',FileNameList[Type]):
                     _fFind,Str=getstr(FindKeyList[Type],'AutoStr',FileNameList[Type],Id)
                     if not _fFind:
-                        return
+                        return SubstanceTagMaker(FileType,NowPart,Type)
                 else:
                     Str=input(Fore.GREEN+f'[INFO]Enter Trigger {TagNameList[Type]} Str.'+Fore.RESET)
             else:
@@ -167,7 +167,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
                 if checkconfig('AutoStr','music'):
                     _fFInd,Str=getstr('name','AutoStr','music',Id)
                     if not _fFInd:
-                        return
+                        return SubstanceTagMaker(FileType,NowPart,Type)
                 else:
                     Str=input(Fore.GREEN+'[INFO]Enter the Str of music:'+Fore.RESET)
                     isHard=input(Fore.GREEN+'[INFO]Limit 課題曲 to Master mode only?(y/n)'+Fore.RESET).lower()
@@ -181,7 +181,7 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
             if checkconfig('AutoStr',NowPart):
                 _fFInd,Str=getstr('name','AutoStr',NowPart,Id)
                 if not _fFInd:
-                    return
+                    return SubstanceTagMaker(FileType,NowPart,Type)
             else:
                 Str=input(Fore.GREEN+f'[INFO]Enter the Str of {NowPart}:'+Fore.RESET)
             return tagM('<'+NowPart+'Name><id>'+Id+'</id><str>'+Str+'</str><data /></'+NowPart+'Name>')
