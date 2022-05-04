@@ -90,18 +90,21 @@ def MapM():
             #Page and index
             _sPage=input(Fore.GREEN+'[INFO]Enter this mapArea Page.'+Fore.RESET)
             _sIndex=input(Fore.GREEN+'[INFO]Enter this mapArea Index in that page.'+Fore.RESET)
-            _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<pageIndex>'+_sPage+'</pageIndex>'))
-            _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<indexInPage>'+_sIndex+'</indexInPage>'))
+            if int(_sIndex)>8:
+                print(Fore.RED+'[ERROR] Index Out of range'+Fore.RESET)
+            else:
+                _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<pageIndex>'+_sPage+'</pageIndex>'))
+                _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<indexInPage>'+_sIndex+'</indexInPage>'))
 
-            #requiredAchievementCount
-            _sRequiredAchievementCount=input(Fore.GREEN+'[INFO]Required Achievement Count.(Not enable enter->0)'+Fore.RESET)
-            _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<requiredAchievementCount>'+_sRequiredAchievementCount+'</requiredAchievementCount>'))
+                #requiredAchievementCount
+                _sRequiredAchievementCount=input(Fore.GREEN+'[INFO]Required Achievement Count.(Not enable enter->0)'+Fore.RESET)
+                _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<requiredAchievementCount>'+_sRequiredAchievementCount+'</requiredAchievementCount>'))
 
-            #gauge
-            _tgauge=SubstanceTagMaker('Map','gauge',0)
-            _tMapDataAreaInfo.MapDataAreaInfo.append(_tgauge)
+                #gauge
+                _tgauge=SubstanceTagMaker('Map','gauge',0)
+                _tMapDataAreaInfo.MapDataAreaInfo.append(_tgauge)
 
-            _dXml.MapData.infos.append(_tMapDataAreaInfo)
+                _dXml.MapData.infos.append(_tMapDataAreaInfo)
 
             if input(Fore.GREEN+'Continue add MapAreaInfo?(y/n)'+Fore.RESET).lower()=='n':
                 break
