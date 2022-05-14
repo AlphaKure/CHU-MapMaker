@@ -1,9 +1,14 @@
 from colorama import Fore
+from module.cross import *
+
+'''
+debug
 from cross import *
+'''
 
 os.system('cls') #避免colorama錯誤
 
-def MapAreaM():
+def MapAreaM(Content):
     if not checkconfig('SavePath','MapAreaPath'):
         print(Fore.RED+'[ERROR] You didn\'t enter save path for MapArea!'+Fore.RESET)
         os.system('PAUSE')

@@ -1,11 +1,17 @@
 from colorama import Fore
 
+from module.cross import *
+from module.substances import *
+
+'''
+debug
 from cross import *
 from substances import *
+'''
 
 os.system('cls') #避免colorama錯誤
 
-def MapBonusM():
+def MapBonusM(Content):
     if not checkconfig('SavePath','MapBonusPath'):
         print(Fore.RED+'[ERROR] You didn\'t enter save path for MapBonus!'+Fore.RESET)
         os.system('PAUSE')

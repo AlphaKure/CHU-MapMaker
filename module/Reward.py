@@ -1,11 +1,17 @@
 from colorama import Fore
 
+from module.cross import *
+from module.substances import *
+
+'''
+debug
 from cross import *
 from substances import *
+'''
 
 os.system('cls') #避免colorama錯誤
 
-def Reward_M():
+def RewardM(Content):
     if not checkconfig('SavePath','RewardPath'):
         print(Fore.RED+'[ERROR] You didn\'t enter save path for reward!'+Fore.RESET)
         os.system('PAUSE')
@@ -116,4 +122,4 @@ def Reward_M():
         os.system('PAUSE')
         
 if __name__=='__main__'and PathChk():
-    Reward_M()
+    RewardM()

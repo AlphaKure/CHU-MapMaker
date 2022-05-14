@@ -1,10 +1,15 @@
 from colorama import Fore
 
+from module.cross import *
+
+'''
+debug
 from cross import *
+'''
 
 os.system('cls') #避免colorama錯誤
 
-def EventM():
+def EventM(Content):
 
     if not checkconfig('SavePath','EventPath'):
         print(Fore.RED+'[ERROR] You didn\'t enter save path for Event!'+Fore.RESET)
