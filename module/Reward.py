@@ -13,7 +13,7 @@ os.system('cls') #避免colorama錯誤
 
 def RewardM(Content):
     if not checkconfig('SavePath','RewardPath'):
-        print(Fore.RED+'[ERROR] You didn\'t enter save path for reward!'+Fore.RESET)
+        print(Fore.RED+Content['Cross']['Error_Msg']['No_Save_Path'].replace('%now%','Reward')+Fore.RESET)
         os.system('PAUSE')
         return
     else:
@@ -27,11 +27,11 @@ def RewardM(Content):
         _dXml.append(_tDataTitle)
 
         #add dataname and name tags
-        _sRewardNum=input(Fore.GREEN+'[INFO]Enter custom Rewardnum:'+Fore.RESET)
-        _sRewardStr=input(Fore.GREEN+'[INFO]Enter custom Rewardstr:'+Fore.RESET)
+        _sRewardNum=input(Fore.GREEN+Content['Reward']['Input']['Reward_Num']+Fore.RESET)
+        _sRewardStr=input(Fore.GREEN+Content['Cross']['Input']['Input_Name'].replace('%now%','Reward')+Fore.RESET)
         _tName=tagM('<name><id>'+_sRewardNum+'</id><str>'+_sRewardStr+'</str><data/></name>')
         if len(_sRewardNum)>9:
-            print(Fore.RED+'[ERROR] Data number should be less than 9 digits!'+Fore.RESET)
+            print(Fore.RED+Content['Reward']['Error_Msg']['Reward_Num_Out_Of_Range']+Fore.RESET)
             os.system('PAUSE')
             return
         while len(_sRewardNum)!=9:
@@ -40,27 +40,18 @@ def RewardM(Content):
         _dXml.RewardData.append(_tdataName)
         _dXml.RewardData.append(_tName)
 
-        #choose 1 type of Reward
-        print(Fore.GREEN+'\n[INFO]What kind of reward that you want to add?'+Fore.RESET)
-        print(Fore.WHITE+'[0]Enter 0: gamePoint')
-        print(Fore.WHITE+'[1]Enter 1: ticket')
-        print(Fore.WHITE+'[2]Enter 2: trophy')
-        print(Fore.WHITE+'[3]Enter 3: chara')
-        print(Fore.WHITE+'[4]Enter 4: skillseed')
-        print(Fore.WHITE+'[5]Enter 5: nameplate')
-        print(Fore.WHITE+'[6]Enter 6: music')
-        print(Fore.WHITE+'[7]Enter 7: mapicon')
-        print(Fore.WHITE+'[8]Enter 8: systemvoice')
-        print(Fore.WHITE+'[9]Enter 9: avatarAccessory')
-        print(Fore.WHITE+'[10]Enter 10: frame')
+        #Menu
+        print(Fore.GREEN+Content['Reward']['Menu']['Title']+Fore.RESET)
+        print(Fore.GREEN+Content['Reward']['Menu']['Help']+Fore.RESET)
+        for i in range(0,11):
+            print(Fore.GREEN+Content['Reward']['Menu']['Type_'+str(i)]+Fore.RESET)
         _iType=int(input(Fore.GREEN+'>'+Fore.RESET))
         if _iType>10:
-            print(Fore.RED+'[ERROR] Out of range!'+Fore.RESET)
+            print(Fore.RED+Content['Reward']['Error_Msg']['Type_Out_Of_Range']+Fore.RESET)
             return
         else:
             _tSubstances=tagM('<substances><list><RewardSubstanceData><type>'+str(_iType)+'</type></RewardSubstanceData></list></substances>')
             _dXml.RewardData.append(_tSubstances)
-            print(Fore.RED+'\n[WARNING]This tool is ONLY add for offical data. If you want to add custom data likes ddsMap or chara, etc. Please add custom data by yourself.')
 
             #gamepoint reward
             _tGamepoint=SubstanceTagMaker('Reward','gamePoint',_iType)
@@ -118,7 +109,7 @@ def RewardM(Content):
             f.close()
 
         XMLFormat(_sSavePath+'/Reward.xml')
-        print(Fore.GREEN+'\nFinish!!!'+Fore.RESET)
+        print(Fore.GREEN+'\n'+Content['Cross']['Output']['Xml_Make_Finish']+Fore.RESET)
         os.system('PAUSE')
         
 if __name__=='__main__'and PathChk():
