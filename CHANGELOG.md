@@ -46,3 +46,11 @@ Release-V1.0
 all-文本讀取完成
 main-整合介面設計完成
 Reward-文本輸入輸出完成
+
+## 2022/05/15
+
+all-debug程式碼移除
+MapBonus-文本輸入輸出完成
+MapArea-文本輸入輸出完成
+Map-文本輸入輸出完成
+Event-文本輸入輸出完成
