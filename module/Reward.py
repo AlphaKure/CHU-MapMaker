@@ -3,12 +3,6 @@ from colorama import Fore
 from module.cross import *
 from module.substances import *
 
-'''
-debug
-from cross import *
-from substances import *
-'''
-
 os.system('cls') #避免colorama錯誤
 
 def RewardM(Content):
@@ -112,5 +106,3 @@ def RewardM(Content):
         print(Fore.GREEN+'\n'+Content['Cross']['Output']['Xml_Make_Finish']+Fore.RESET)
         os.system('PAUSE')
         
-if __name__=='__main__'and PathChk():
-    RewardM()

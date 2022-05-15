@@ -3,12 +3,6 @@ from colorama import Fore
 from module.cross import *
 from module.substances import *
 
-'''
-debug
-from cross import *
-from substances import *
-'''
-
 os.system('cls') #避免colorama錯誤
 
 def MapBonusM(Content):
@@ -119,5 +113,3 @@ def MapBonusM(Content):
         print(Fore.GREEN+Content['Cross']['Output']['Xml_Make_Finish'].replace('%now%','MapBonus')+Fore.RESET)
         os.system('PAUSE')
 
-if __name__=='__main__'and PathChk():
-    MapBonusM()

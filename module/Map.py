@@ -3,17 +3,11 @@ from colorama import Fore
 from module.cross import *
 from module.substances import *
 
-'''
-debug
-from cross import *
-from substances import *
-'''
-
 os.system('cls') #避免colorama錯誤
 
 def MapM(Content):
     if not checkconfig('SavePath','MapPath'):
-        print(Fore.RED+'[ERROR] You didn\'t enter save path for Map!'+Fore.RESET)
+        print(Fore.RED+Content['Cross']['Error_Msg']['No_Save_Path'].replace('%now%','Map')+Fore.RESET)
         os.system('PAUSE')
         return
     else:
@@ -27,11 +21,11 @@ def MapM(Content):
         _dXml.append(_tTitle)
 
         #add dataname ,name and netDispPeriod tags
-        _sMapNum=input(Fore.GREEN+'[INFO]Enter custom Map num:'+Fore.RESET)
-        _sMapStr=input(Fore.GREEN+'[INFO]Enter custom Map str:'+Fore.RESET)
+        _sMapNum=input(Fore.GREEN+Content['Cross']['Input']['Input_Num'].replace('%now%','Map')+Fore.RESET)
+        _sMapStr=input(Fore.GREEN+Content['Cross']['Input']['Input_Name'].replace('%now%','Map')+Fore.RESET)
         _tName=tagM('<name><id>'+_sMapNum+'</id><str>'+_sMapStr+'</str><data/></name>')
         if len(_sMapNum)>8:
-            print(Fore.RED+'[ERROR] Data number should be less than 8 digits!'+Fore.RESET)
+            print(Fore.RED+Content['Cross']['Error_Msg']['Num_Out_of_range'].replace('%now%','Map')+Fore.RESET)
             os.system('PAUSE')
             return
         while len(_sMapNum)!=8:
@@ -44,7 +38,7 @@ def MapM(Content):
         _dXml.MapData.append(_tName)
 
         #maptype setup default=2(Maybe wrong) infinit map=1 
-        _sIsMapInfinit=input(Fore.GREEN+'[INFO]Is this map infinit?(y/n)'+Fore.RESET).lower()
+        _sIsMapInfinit=input(Fore.GREEN+Content['Map']['Input']['IsMapInfinit']+Fore.RESET).lower()
         if _sIsMapInfinit=='y':
             _sIsMapInfinit='1'
         else:
@@ -54,8 +48,11 @@ def MapM(Content):
         _dXml.MapData.append(_tMapType)
 
         #mapFilter setting
-        print(Fore.GREEN+'\n[0]Enter 0: Collaboration \n[1]Enter 1: Current \n[2]Enter 2: Sega \n[3]Enter 3: Other'+Fore.RESET)
-        _sMapFilterId=input(Fore.GREEN+'[INFO]Enter custom Map Type:'+Fore.RESET)
+        print(Fore.GREEN+Content['Map']['Menu']['Title']+Fore.RESET)
+        print(Fore.GREEN+Content['Map']['Menu']['Help']+Fore.RESET)
+        for i in range(0,4):
+            print(Fore.GREEN+Content['Map']['Menu']['Type_'+str(i)]+Fore.RESET)
+        _sMapFilterId=input(Fore.GREEN+'>'+Fore.RESET)
         _sMapFilterStr,_sMapFilterData=mapFilter(_sMapFilterId)
         _tMapFilterID=tagM('<mapFilterID><id>'+_sMapFilterId+'</id><str>'+_sMapFilterStr+'</str><data>'+_sMapFilterData+'</data></mapFilterID>')
         _dXml.MapData.append(_tMapFilterID)
@@ -94,10 +91,10 @@ def MapM(Content):
             _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<isHard>'+_sIsHard+'</isHard>'))
 
             #Page and index
-            _sPage=input(Fore.GREEN+'[INFO]Enter this mapArea Page.'+Fore.RESET)
-            _sIndex=input(Fore.GREEN+'[INFO]Enter this mapArea Index in that page.'+Fore.RESET)
+            _sPage=input(Fore.GREEN+Content['Map']['Input']['MapAreaPage']+Fore.RESET)
+            _sIndex=input(Fore.GREEN+Content['Map']['Input']['MapAreaIndex']+Fore.RESET)
             if int(_sIndex)>8:
-                print(Fore.RED+'[ERROR] Index Out of range'+Fore.RESET)
+                print(Fore.RED+Content['Map']['Error_Msg']['Index_Out_Of_Range']+Fore.RESET)
             else:
                 _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<pageIndex>'+_sPage+'</pageIndex>'))
                 _tMapDataAreaInfo.MapDataAreaInfo.append(tagM('<indexInPage>'+_sIndex+'</indexInPage>'))
@@ -112,7 +109,7 @@ def MapM(Content):
 
                 _dXml.MapData.infos.append(_tMapDataAreaInfo)
 
-            if input(Fore.GREEN+'Continue add MapAreaInfo?(y/n)'+Fore.RESET).lower()=='n':
+            if input(Fore.GREEN+Content['Map']['Input']['Continue']+Fore.RESET).lower()=='n':
                 break
 
 
@@ -126,8 +123,6 @@ def MapM(Content):
             f.close()
 
         XMLFormat(_sSavePath+'/Map.xml')
-        print(Fore.GREEN+'\nFinish!!!'+Fore.RESET)
+        print(Fore.GREEN+Content['Cross']['Output']['Xml_Make_Finish'].replace('%now%','Map')+Fore.RESET)
         os.system('PAUSE')
         
-if __name__=='__main__'and PathChk():
-    MapM()

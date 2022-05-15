@@ -2,10 +2,6 @@ from bs4 import BeautifulSoup
 from colorama import Fore
 
 from module.cross import *
-'''
-debug
-from cross import *
-'''
 
 def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
     #Type為使用者選擇的值，假設使用者選擇5，為了生成其他選項的空值TAG，假設到6的地方由於輸入Type不同，即可自行生成空值TAG
