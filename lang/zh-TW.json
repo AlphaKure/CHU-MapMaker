@@ -22,6 +22,7 @@
         },
         "Error_Msg": {
             "Num_Out_of_Range": "[ERROR] %now%編號超出範圍 (最多八碼)!!",
+            "Type_Out_Of_Range": "[ERROR] 超出種類範圍!",
             "No_Save_Path": "[ERROR] 你還沒設定輸出%now%位置!!!",
             "SystemPath_Error": "[ERROR] 系統位置錯誤!!!",
             "Not_find_ItemID": "[ERROR] 找不到 %id%",
@@ -47,8 +48,7 @@
             "Reward_Num": "[INFO] 請輸入Reward編號 (最多九碼)>"
         },
         "Error_Msg": {
-            "Reward_Num_Out_Of_Range": "[ERROR] 編號超過九碼!",
-            "Type_Out_Of_Range": "[ERROR] 超出種類範圍!"
+            "Reward_Num_Out_Of_Range": "[ERROR] 編號超過九碼!"
         },
         "Output": {},
         "Menu": {
@@ -71,7 +71,7 @@
         "Input": {},
         "Error_Msg": {},
         "Output": {
-            "Counter": "[WARNING] 你最多可以設定四個Bonus判定條件，你已經設定:"
+            "Counter": "[WARNING] 你最多可以設定四個Bonus判定條件，你已經設定:%num%"
         },
         "Menu": {
             "Title": "[INFO] 請輸入你要設定的判定條件種類",
