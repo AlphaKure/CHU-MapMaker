@@ -47,7 +47,7 @@ def RewardM(Content):
             print(Fore.GREEN+Content['Reward']['Menu']['Type_'+str(i)]+Fore.RESET)
         _iType=int(input(Fore.GREEN+'>'+Fore.RESET))
         if _iType>10:
-            print(Fore.RED+Content['Reward']['Error_Msg']['Type_Out_Of_Range']+Fore.RESET)
+            print(Fore.RED+Content['Cross']['Error_Msg']['Type_Out_Of_Range']+Fore.RESET)
             return
         else:
             _tSubstances=tagM('<substances><list><RewardSubstanceData><type>'+str(_iType)+'</type></RewardSubstanceData></list></substances>')
