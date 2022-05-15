@@ -13,7 +13,7 @@ os.system('cls') #避免colorama錯誤
 
 def MapBonusM(Content):
     if not checkconfig('SavePath','MapBonusPath'):
-        print(Fore.RED+'[ERROR] You didn\'t enter save path for MapBonus!'+Fore.RESET)
+        print(Fore.RED+Content['Cross']['Error_Msg']['No_Save_Path'].replace('%now%','MapBonus')+Fore.RESET)
         os.system('PAUSE')
         return
     else:
@@ -27,11 +27,11 @@ def MapBonusM(Content):
         _dXml.append(_tDataTitle)
 
         #add dataname and name tags
-        _sMapBonusNum=input(Fore.GREEN+'[INFO]Enter custom MapBonusnum:'+Fore.RESET)
-        _sMapBonusStr=input(Fore.GREEN+'[INFO]Enter custom MapBonusstr:'+Fore.RESET)
+        _sMapBonusNum=input(Fore.GREEN+Content['Cross']['Input']['Input_Num'].replace('%now%','MapBonus')+Fore.RESET)
+        _sMapBonusStr=input(Fore.GREEN+Content['Cross']['Input']['Input_Name'].replace('%now%','MapBonus')+Fore.RESET)
         _tName=tagM('<name><id>'+_sMapBonusNum+'</id><str>'+_sMapBonusStr+'</str><data/></name>')
         if len(_sMapBonusNum)>8:
-            print(Fore.RED+'[ERROR] Data number should be less than 8 digits!'+Fore.RESET)
+            print(Fore.RED+Content['Cross']['Error_Msg']['Num_Out_of_range'].replace('%now%','MapBonus')+Fore.RESET)
             os.system('PAUSE')
             return
         while len(_sMapBonusNum)!=8:
@@ -47,27 +47,19 @@ def MapBonusM(Content):
         _fFinish=False
         while not _fFinish:
             #choose 1 type of trigger
-            print(Fore.RED+f'\n[WARNING]You can set up to 4 Bonuses, you have currently set {_iCount}.'+Fore.RESET)
-            print(Fore.GREEN+'\n[INFO]What kind of bonus condiction that you want to add?')
-            print(Fore.WHITE+'[0]Enter 0: chara')
-            print(Fore.WHITE+'[1]Enter 1: charawork')
-            print(Fore.WHITE+'[2]Enter 2: skill')
-            print(Fore.WHITE+'[3]Enter 3: skillCategory')
-            print(Fore.WHITE+'[4]Enter 4: music')
-            print(Fore.WHITE+'[5]Enter 5: musicGenre')
-            print(Fore.WHITE+'[6]Enter 6: musicWorks')
-            print(Fore.WHITE+'[7]Enter 7: musicDif')
-            print(Fore.WHITE+'[8]Enter 8: musicLv')
-            print(Fore.RED+'[9]Enter 9: Finish!'+Fore.RESET)
+            print(Fore.RED+Content['MapBonus']['Output']['Counter'].replace('%num%',str(_iCount))+Fore.RESET)
+            print(Fore.GREEN+Content['MapBonus']['Menu']['Title']+Fore.RESET)
+            print(Fore.GREEN+Content['MapBonus']['Menu']['Help']+Fore.RESET)
+            for i in range(0,10):
+                print(Fore.GREEN+Content['MapBonus']['Menu']['Type_'+str(i)]+Fore.RESET)
             _iType=int(input(Fore.GREEN+'>'+Fore.RESET))
             if _iType>9:
-                print(Fore.RED+'[ERROR] Out of range!'+Fore.RESET)
+                print(Fore.RED+Content['Cross']['Error_Msg']['Type_Out_Of_Range']+Fore.RESET)
                 return
             elif _iType==9:
                 _fFinish=True
             else:
                 _tMapBonusSubstanceData=tagM('<MapBonusSubstanceData><type></type></MapBonusSubstanceData>')
-                print(Fore.RED+'\n[WARNING]This tool is ONLY add for offical data. If you want to add custom data likes ddsMap or chara, etc. Please add custom data by yourself.'+Fore.RESET)
                 
                 #將type轉為正確值
                 _tMapBonusSubstanceData.MapBonusSubstanceData.type.string=str(_iType)
@@ -124,7 +116,7 @@ def MapBonusM(Content):
             f.close()
 
         XMLFormat(_sSavePath+'/MapBonus.xml')
-        print(Fore.GREEN+'\nFinish!!!'+Fore.RESET)
+        print(Fore.GREEN+Content['Cross']['Output']['Xml_Make_Finish'].replace('%now%','MapBonus')+Fore.RESET)
         os.system('PAUSE')
 
 if __name__=='__main__'and PathChk():
