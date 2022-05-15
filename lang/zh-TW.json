@@ -94,7 +94,7 @@
             "MapBonus_Str": "[INFO] 請輸入對應MapBonus的名稱>",
             "Enable_Boost": "[INFO] 此MapArea要啟動跑圖加倍嗎? (y/n)>",
             "Boost_Multiplier": "[INFO] 請輸入加成倍數 (Ex: 1.2)>",
-            "ShortenData": "[INFO] 請輸入該ShortenData值 (或輸入-1結束，剩下補0)>",
+            "ShortenData": "[INFO] 請輸入第%Count%筆ShortenData值 (或輸入-1結束，剩下補0)>",
             "MapArea_EndIndex": "[INFO] 請輸入本MapArea終點>",
             "Other_Reward_Index": "[INFO] 請輸入中途小獎勵的位置 (或輸入-1結束增加小獎勵)>",
             "Other_Reward_ID": "[INFO] 請輸入中途小獎勵的ID>",
@@ -111,7 +111,6 @@
     "Map": {
         "Input": {
             "IsMapInfinit": "[INFO] 本地圖為無限圖嗎?(y/n)>",
-            "MapType": "[INFO] 請輸入本地圖種類 ([]內值)>",
             "MapAreaPage": "[INFO] 請輸入該Area在哪一頁>",
             "MapAreaIndex": "[INFO] 請輸入該Area在哪一格>",
             "AchievementCount": "[INFO] 請輸入該Area requiredAchievementCount>",
@@ -122,6 +121,8 @@
         },
         "Output": {},
         "Menu": {
+            "Title":"[INFO] 此地圖種類為?",
+            "Help":"[INFO] 輸入[]內值:",
             "Type_0": "[0] Collaboration",
             "Type_1": "[1] Current",
             "Type_2": "[2] Sega",
