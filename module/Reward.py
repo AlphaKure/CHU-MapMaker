@@ -103,6 +103,6 @@ def RewardM(Content):
             f.close()
 
         XMLFormat(_sSavePath+'/Reward.xml')
-        print(Fore.GREEN+'\n'+Content['Cross']['Output']['Xml_Make_Finish']+Fore.RESET)
+        print(Fore.GREEN+'\n'+Content['Cross']['Output']['Xml_Make_Finish'].replace('%now%','Reward')+Fore.RESET)
         os.system('PAUSE')
         
