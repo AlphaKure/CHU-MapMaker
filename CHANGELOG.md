@@ -54,3 +54,7 @@ MapBonus-文本輸入輸出完成
 MapArea-文本輸入輸出完成
 Map-文本輸入輸出完成
 Event-文本輸入輸出完成
+
+## 2022/05/17
+
+substances-文本輸入輸出完成
