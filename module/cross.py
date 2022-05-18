@@ -6,9 +6,12 @@ import configparser
 import os
 
 def PathChk()->bool:
+
+    global Content
+
     _NowPath=os.getcwd().lower()
     if not 'chu-mapmaker' in _NowPath:
-        print(Fore.RED+'[ERROR]System Path Error!'+Fore.RESET)
+        print(Fore.RED+Content['Cross']['Error_Msg']['SystemPath_Error']+Fore.RESET)
         os.system('pause')
         return False
     if _NowPath.endswith('\module'):
@@ -21,6 +24,9 @@ def tagM(data:str)->BS:
     return _Tag
 
 def getstr(findkey:str,section:str,type:str,itemid:str)->Tuple[bool,str]:
+
+    global Content
+
     _Config=configparser.ConfigParser()
     _Config.read('config.ini')
     _LibraryPath=_Config[section][type]
@@ -33,7 +39,7 @@ def getstr(findkey:str,section:str,type:str,itemid:str)->Tuple[bool,str]:
                 f.close()
             if _dXml.find(findkey).id.string==itemid:
                 return True,_dXml.find(findkey).str.string
-    print(Fore.RED+f'[ERROR]Not find {itemid}'+Fore.RESET)
+    print(Fore.RED+Content['Cross']['Error_Msg']['Not_Found_ItemID'].replace('%id%',itemid)+Fore.RESET)
     os.system('pause')
     return False,' '
 
@@ -65,6 +71,10 @@ def musicDif(id:int)->str:
     return StrList[id]
 
 def mapFilter(id:str)->Tuple[str,str]:
+
+    global Content
+
+
     if id=='0':
         NewFilterStr='Collaboration'
         NewFilterData='イベント'
@@ -78,7 +88,11 @@ def mapFilter(id:str)->Tuple[str,str]:
         NewFilterStr='Other'
         NewFilterData='過去バージョン'
     else:
-        print(Fore.RED+'[ERROR]ID ERROR!'+Fore.RESET)
+        print(Fore.RED+Content['Cross']['Error_Msg']['MapFilter_ID_Error']+Fore.RESET)
         os.system('pause')
         return
     return NewFilterStr,NewFilterData
+
+def SetContent(Data):
+    global Content
+    Content=Data
