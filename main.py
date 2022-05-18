@@ -9,7 +9,8 @@ def GetContent(lang):
     try:
         with open('lang/'+lang+'.json','r',encoding='utf-8')as f:
             Content=ujson.loads(f.read())
-            module.substances.GetContent(Content)
+            module.substances.SetContent(Content)
+            module.cross.SetContent(Content)
             return Content
     except:
         print(Fore.RED+'This language is not supported!'+Fore.RESET)
