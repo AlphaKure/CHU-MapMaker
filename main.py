@@ -1,13 +1,15 @@
+# -*- coding : utf-8-*-
+# pyinstaller -F D:\DeskTop\CHU-MapMaker\main.py  --icon D:\DeskTop\CHU-MapMaker\favicon.ico
 import module
 
-import pyfiglet
+import art
 import ujson
 from colorama import Fore
 import os
 
 def GetContent(lang):
     try:
-        with open('lang/'+lang+'.json','r',encoding='utf-8')as f:
+        with open('./lang/'+lang+'.json','r',encoding='utf-8')as f:
             Content=ujson.loads(f.read())
             module.substances.SetContent(Content)
             module.cross.SetContent(Content)
@@ -27,7 +29,7 @@ def Main():
         return
     while True:
         #logo
-        print(pyfiglet.figlet_format("CHU-MapMaker",font="slant"))
+        art.tprint('CHU-MapMaker')
         print(Fore.GREEN+Content['Cross']['Menu']['Welcome']+'\n'+Fore.RESET)
         print(Fore.GREEN+Content['Cross']['Menu']['Title']+Fore.RESET)
         print(Fore.GREEN+Content['Cross']['Menu']['Help']+Fore.RESET)
