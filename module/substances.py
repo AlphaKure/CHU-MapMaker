@@ -189,6 +189,6 @@ def SubstanceTagMaker(FileType:str,NowPart:str,Type:int)->BeautifulSoup:
                 Str=input(Fore.GREEN+f'[INFO]Enter the Str of {NowPart}:'+Fore.RESET)
             return tagM('<'+NowPart+'Name><id>'+Id+'</id><str>'+Str+'</str><data /></'+NowPart+'Name>')
 
-def GetContent(data):
+def SetContent(data):
     global Content
     Content=data
