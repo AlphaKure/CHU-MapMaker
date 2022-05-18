@@ -25,7 +25,7 @@
             "Type_Out_Of_Range": "[ERROR] 超出種類範圍!",
             "No_Save_Path": "[ERROR] 你還沒設定輸出%now%位置!!!",
             "SystemPath_Error": "[ERROR] 系統位置錯誤!!!",
-            "Not_find_ItemID": "[ERROR] 找不到 %id%",
+            "Not_Found_ItemID": "[ERROR] 找不到 %id%",
             "MapFilter_ID_Error": "[ERROR] Map種類ID錯誤"
         },
         "Output": {
