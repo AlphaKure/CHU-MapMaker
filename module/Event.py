@@ -8,7 +8,8 @@ def EventM(Content):
     if not checkconfig('SavePath', 'EventPath'):
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['No_Save_Path'].replace('%now%', 'Event')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')
         return
     else:
         # 建立Xml資料
@@ -35,6 +36,7 @@ def EventM(Content):
         if len(_sEventNum) > 8:
             print(Fore.RED+Content['Cross']['Error_Msg']
                   ['Num_Out_of_range'].replace('%now%', 'Event')+Fore.RESET)
+        if sys.platform == 'win32':
             os.system('PAUSE')
             return
         while len(_sEventNum) != 8:
@@ -94,4 +96,5 @@ def EventM(Content):
         XMLFormat(_sSavePath+'/Event.xml')
         print(Fore.GREEN+Content['Cross']['Output']
               ['Xml_Make_Finish'].replace('%now%', 'Event')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')

@@ -13,8 +13,8 @@ import module
 
 def GetContent(lang):
     try:
-        with open('./lang/'+lang+'.json','r',encoding='utf-8')as f:
-            Content=ujson.loads(f.read())
+        with open('./lang/'+lang+'.json', 'r', encoding='utf-8')as f:
+            Content = ujson.loads(f.read())
             module.substances.SetContent(Content)
             module.cross.SetContent(Content)
             return Content
@@ -24,42 +24,44 @@ def GetContent(lang):
 
 
 def Main():
-    if sys.platform=='win32':
+    if sys.platform == 'win32':
         os.system('cls')
     else:
         os.system('clear')
-    #content read
-    Content=GetContent(module.cross.getconfig('lang','lang'))
-    if Content=='':
-        os.system('pause')
+    # content read
+    Content = GetContent(module.cross.getconfig('lang', 'lang'))
+    if Content == '':
+        if sys.platform == 'win32':
+            os.system('pause')
         return
     while True:
-        #logo
+        # logo
         art.tprint('CHU-MapMaker')
         print(Fore.GREEN+Content['Cross']['Menu']['Welcome']+'\n'+Fore.RESET)
         print(Fore.GREEN+Content['Cross']['Menu']['Title']+Fore.RESET)
         print(Fore.GREEN+Content['Cross']['Menu']['Help']+Fore.RESET)
-        for i in range(0,6):
-            print(Fore.GREEN+Content['Cross']['Menu']['Type_'+str(i)]+Fore.RESET)
-        Cmd=int(input(Fore.GREEN+'>'+Fore.RESET))
-        if Cmd>5:
+        for i in range(0, 6):
+            print(Fore.GREEN+Content['Cross']['Menu']
+                  ['Type_'+str(i)]+Fore.RESET)
+        Cmd = int(input(Fore.GREEN+'>'+Fore.RESET))
+        if Cmd > 5:
             continue
-        elif Cmd==5:
+        elif Cmd == 5:
             print(Fore.GREEN+'[INFO] See you next time!'+Fore.RESET)
-            os.system('pause')
+            if sys.platform == 'win32':
+                os.system('pause')
             return
-        elif Cmd==0:
+        elif Cmd == 0:
             module.Reward.RewardM(Content)
-        elif Cmd==1:
+        elif Cmd == 1:
             module.MapBonus.MapBonusM(Content)
-        elif Cmd==2:
+        elif Cmd == 2:
             module.MapArea.MapAreaM(Content)
-        elif Cmd==3:
+        elif Cmd == 3:
             module.Map.MapM(Content)
-        elif Cmd==4:
+        elif Cmd == 4:
             module.Event.EventM(Content)
 
 
-
-if __name__=='__main__'and module.cross.PathChk():
+if __name__ == '__main__' and module.cross.PathChk():
     Main()

@@ -6,7 +6,8 @@ def MapAreaM(Content):
     if not checkconfig('SavePath', 'MapAreaPath'):
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['No_Save_Path'].replace('%now%', 'MapArea')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')
         return
     else:
         # 建立Xml資料
@@ -31,7 +32,8 @@ def MapAreaM(Content):
         if len(_sMapAreaNum) > 8:
             print(Fore.RED+Content['Cross']['Error_Msg']
                   ['Num_Out_of_range'].replace('%now%', 'MapBonus')+Fore.RESET)
-            os.system('PAUSE')
+            if sys.platform == 'win32':
+                os.system('PAUSE')
             return
         while len(_sMapAreaNum) != 8:
             _sMapAreaNum = '0'+_sMapAreaNum
@@ -148,4 +150,5 @@ def MapAreaM(Content):
         XMLFormat(_sSavePath+'/MapArea.xml')
         print(Fore.GREEN+Content['Cross']['Output']
               ['Xml_Make_Finish'].replace('%now%', 'MapArea')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')

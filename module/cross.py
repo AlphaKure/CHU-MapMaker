@@ -1,6 +1,7 @@
 from typing import Tuple
 import configparser
 import os
+import sys
 
 from bs4 import BeautifulSoup as BS
 from colorama import Fore
@@ -15,7 +16,8 @@ def PathChk() -> bool:
     if not 'chu-mapmaker' in _NowPath:
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['SystemPath_Error']+Fore.RESET)
-        os.system('pause')
+        if sys.platform == 'win32':
+            os.system('pause')
         return False
     if _NowPath.endswith('\module'):
         os.chdir(_NowPath[:-7])
@@ -48,7 +50,8 @@ def getstr(findkey: str, section: str, type: str, itemid: str) -> Tuple[bool, st
                 return True, _dXml.find(findkey).str.string
     print(Fore.RED+Content['Cross']['Error_Msg']
           ['Not_Found_ItemID'].replace('%id%', itemid)+Fore.RESET)
-    os.system('pause')
+    if sys.platform == 'win32':
+        os.system('pause')
     return False, ' '
 
 
@@ -104,7 +107,8 @@ def mapFilter(id: str) -> Tuple[str, str]:
     else:
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['MapFilter_ID_Error']+Fore.RESET)
-        os.system('pause')
+        if sys.platform == 'win32':
+            os.system('pause')
         return
     return NewFilterStr, NewFilterData
 

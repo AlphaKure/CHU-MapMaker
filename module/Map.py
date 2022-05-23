@@ -8,7 +8,8 @@ def MapM(Content):
     if not checkconfig('SavePath', 'MapPath'):
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['No_Save_Path'].replace('%now%', 'Map')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')
         return
     else:
         # 建立Xml資料
@@ -31,7 +32,8 @@ def MapM(Content):
         if len(_sMapNum) > 8:
             print(Fore.RED+Content['Cross']['Error_Msg']
                   ['Num_Out_of_range'].replace('%now%', 'Map')+Fore.RESET)
-            os.system('PAUSE')
+            if sys.platform == 'win32':
+                os.system('PAUSE')
             return
         while len(_sMapNum) != 8:
             _sMapNum = '0'+_sMapNum
@@ -142,4 +144,5 @@ def MapM(Content):
         XMLFormat(_sSavePath+'/Map.xml')
         print(Fore.GREEN+Content['Cross']['Output']
               ['Xml_Make_Finish'].replace('%now%', 'Map')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')

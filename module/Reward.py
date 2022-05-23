@@ -8,7 +8,8 @@ def RewardM(Content):
     if not checkconfig('SavePath', 'RewardPath'):
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['No_Save_Path'].replace('%now%', 'Reward')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')
         return
     else:
         # NEW xml data
@@ -31,7 +32,8 @@ def RewardM(Content):
         if len(_sRewardNum) > 9:
             print(Fore.RED+Content['Reward']['Error_Msg']
                   ['Reward_Num_Out_Of_Range']+Fore.RESET)
-            os.system('PAUSE')
+            if sys.platform == 'win32':
+                os.system('PAUSE')
             return
         while len(_sRewardNum) != 9:
             _sRewardNum = '0'+_sRewardNum
@@ -126,4 +128,5 @@ def RewardM(Content):
         XMLFormat(_sSavePath+'/Reward.xml')
         print(Fore.GREEN+'\n'+Content['Cross']['Output']
               ['Xml_Make_Finish'].replace('%now%', 'Reward')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')

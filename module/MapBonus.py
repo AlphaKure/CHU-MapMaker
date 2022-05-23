@@ -8,7 +8,8 @@ def MapBonusM(Content):
     if not checkconfig('SavePath', 'MapBonusPath'):
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['No_Save_Path'].replace('%now%', 'MapBonus')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')
         return
     else:
         # NEW xml data
@@ -31,7 +32,8 @@ def MapBonusM(Content):
         if len(_sMapBonusNum) > 8:
             print(Fore.RED+Content['Cross']['Error_Msg']
                   ['Num_Out_of_range'].replace('%now%', 'MapBonus')+Fore.RESET)
-            os.system('PAUSE')
+            if sys.platform == 'win32':
+                os.system('PAUSE')
             return
         while len(_sMapBonusNum) != 8:
             _sMapBonusNum = '0'+_sMapBonusNum
@@ -133,4 +135,5 @@ def MapBonusM(Content):
         XMLFormat(_sSavePath+'/MapBonus.xml')
         print(Fore.GREEN+Content['Cross']['Output']
               ['Xml_Make_Finish'].replace('%now%', 'MapBonus')+Fore.RESET)
-        os.system('PAUSE')
+        if sys.platform == 'win32':
+            os.system('PAUSE')
