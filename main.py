@@ -3,6 +3,7 @@
 # pipreqs . --encoding=utf8 --force
 import os
 import sys
+from typing import Dict
 
 import art
 import ujson
@@ -11,28 +12,38 @@ from colorama import Fore
 import module
 
 
-def GetContent(lang):
+def GetContent(Lang)->Dict|False:
+    '''
+    ## This program is used to read text json files.
+    Transfer the text data into other modules.
+    '''
     try:
-        with open('./lang/'+lang+'.json', 'r', encoding='utf-8')as f:
-            Content = ujson.loads(f.read())
-            module.substances.SetContent(Content)
-            module.cross.SetContent(Content)
+        with open('./lang/'+Lang+'.json', 'r', encoding='utf-8')as File:
+            Content = ujson.loads(File.read())
+            module.substances.SetContent(Content) # To substances
+            module.cross.SetContent(Content) # To cross
             return Content
     except:
         print(Fore.RED+'This language is not supported!'+Fore.RESET)
-        return ''
+        return False
 
 
 def Main():
+    '''
+    ## Main Program
+    '''
+
     if sys.platform == 'win32':
         os.system('cls')
     else:
-        os.system('clear')
-    # content read
-    Content = GetContent(module.cross.getconfig('lang', 'lang'))
-    if Content == '':
+        os.system('clear') # For Linux
+
+    
+    # Content read
+    Content = GetContent(module.cross.GetConfig('lang', 'lang'))
+    if Content == False:
         if sys.platform == 'win32':
-            os.system('pause')
+            os.system('pause') # Fail
         return
     while True:
         # logo
@@ -40,28 +51,28 @@ def Main():
         print(Fore.GREEN+Content['Cross']['Menu']['Welcome']+'\n'+Fore.RESET)
         print(Fore.GREEN+Content['Cross']['Menu']['Title']+Fore.RESET)
         print(Fore.GREEN+Content['Cross']['Menu']['Help']+Fore.RESET)
-        for i in range(0, 6):
+        for Num in range(0, 6):
             print(Fore.GREEN+Content['Cross']['Menu']
-                  ['Type_'+str(i)]+Fore.RESET)
-        Cmd = int(input(Fore.GREEN+'>'+Fore.RESET))
-        if Cmd > 5:
+                  ['Type_'+str(Num)]+Fore.RESET)
+        Command = int(input(Fore.GREEN+'>'+Fore.RESET))
+        if Command > 5:
             continue
-        elif Cmd == 5:
+        elif Command == 5:
             print(Fore.GREEN+'[INFO] See you next time!'+Fore.RESET)
             if sys.platform == 'win32':
                 os.system('pause')
             return
-        elif Cmd == 0:
-            module.Reward.RewardM(Content)
-        elif Cmd == 1:
-            module.MapBonus.MapBonusM(Content)
-        elif Cmd == 2:
-            module.MapArea.MapAreaM(Content)
-        elif Cmd == 3:
-            module.Map.MapM(Content)
-        elif Cmd == 4:
-            module.Event.EventM(Content)
+        elif Command == 0:
+            module.Reward.RewardM(Content) # Call Reward
+        elif Command == 1:
+            module.MapBonus.MapBonusM(Content) # Call MapBonus
+        elif Command == 2:
+            module.MapArea.MapAreaM(Content) # Call MapArea
+        elif Command == 3:
+            module.Map.MapM(Content) # Call Map
+        elif Command == 4:
+            module.Event.EventM(Content) # Call Event
 
 
-if __name__ == '__main__' and module.cross.PathChk():
+if __name__ == '__main__' and module.cross.PathCheck():
     Main()

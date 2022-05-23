@@ -5,134 +5,137 @@ from module.substances import *
 
 
 def MapBonusM(Content):
-    if not checkconfig('SavePath', 'MapBonusPath'):
+    '''
+    ## Used to create MapBonus.xml.
+    '''
+    if not CheckConfig('SavePath', 'MapBonusPath'):
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['No_Save_Path'].replace('%now%', 'MapBonus')+Fore.RESET)
         if sys.platform == 'win32':
             os.system('PAUSE')
         return
     else:
-        # NEW xml data
-        _dXml = tagM('')
+        # create xml data
+        XMLData = TagM('')
 
         # add datatitle tag
-        _tXmlVer = tagM('<?xml version="1.0" encoding="utf-8"?>')
-        _tDataTitle = tagM(
+        TagXMLVer = TagM('<?xml version="1.0" encoding="utf-8"?>')
+        TagDataTitle = TagM(
             '<MapBonusData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></MapBonusData>')
-        _dXml.append(_tXmlVer)
-        _dXml.append(_tDataTitle)
+        XMLData.append(TagXMLVer)
+        XMLData.append(TagDataTitle)
 
         # add dataname and name tags
-        _sMapBonusNum = input(
+        MapBonusNum = input(
             Fore.GREEN+Content['Cross']['Input']['Input_Num'].replace('%now%', 'MapBonus')+Fore.RESET)
-        _sMapBonusStr = input(
+        MapBonusStr = input(
             Fore.GREEN+Content['Cross']['Input']['Input_Name'].replace('%now%', 'MapBonus')+Fore.RESET)
-        _tName = tagM('<name><id>'+_sMapBonusNum+'</id><str>' +
-                      _sMapBonusStr+'</str><data/></name>')
-        if len(_sMapBonusNum) > 8:
+        TagName = TagM('<name><id>'+MapBonusNum+'</id><str>' +
+                      MapBonusStr+'</str><data/></name>')
+        if len(MapBonusNum) > 8:
             print(Fore.RED+Content['Cross']['Error_Msg']
                   ['Num_Out_of_range'].replace('%now%', 'MapBonus')+Fore.RESET)
             if sys.platform == 'win32':
                 os.system('PAUSE')
             return
-        while len(_sMapBonusNum) != 8:
-            _sMapBonusNum = '0'+_sMapBonusNum
-        _tdataName = tagM('<dataName>mapBonus'+_sMapBonusNum+'</dataName>')
-        _dXml.MapBonusData.append(_tdataName)
-        _dXml.MapBonusData.append(_tName)
+        while len(MapBonusNum) != 8:
+            MapBonusNum = '0'+MapBonusNum
+        TagDataName = TagM('<dataName>mapBonus'+MapBonusNum+'</dataName>')
+        XMLData.MapBonusData.append(TagDataName)
+        XMLData.MapBonusData.append(TagName)
 
-        _tSubstances = tagM('<substances><list></list></substances>')
-        _dXml.MapBonusData.append(_tSubstances)
+        TagSubstances = TagM('<substances><list></list></substances>')
+        XMLData.MapBonusData.append(TagSubstances)
 
-        _iCount = 0
-        _fFinish = False
-        while not _fFinish:
+        CountOfBonus = 0
+        IsFinish = False
+        while not IsFinish:
             # choose 1 type of trigger
             print(Fore.RED+Content['MapBonus']['Output']
-                  ['Counter'].replace('%num%', str(_iCount))+Fore.RESET)
+                  ['Counter'].replace('%num%', str(CountOfBonus))+Fore.RESET)
             print(Fore.GREEN+Content['MapBonus']['Menu']['Title']+Fore.RESET)
             print(Fore.GREEN+Content['MapBonus']['Menu']['Help']+Fore.RESET)
-            for i in range(0, 10):
+            for Num in range(0, 10):
                 print(Fore.GREEN+Content['MapBonus']
-                      ['Menu']['Type_'+str(i)]+Fore.RESET)
-            _iType = int(input(Fore.GREEN+'>'+Fore.RESET))
-            if _iType > 9:
+                      ['Menu']['Type_'+str(Num)]+Fore.RESET)
+            InputType = int(input(Fore.GREEN+'>'+Fore.RESET))
+            if InputType > 9:
                 print(Fore.RED+Content['Cross']['Error_Msg']
                       ['Type_Out_Of_Range']+Fore.RESET)
                 return
-            elif _iType == 9:
-                _fFinish = True
+            elif InputType == 9:
+                IsFinish = True
             else:
-                _tMapBonusSubstanceData = tagM(
+                TagMapBonusSubstanceData = TagM(
                     '<MapBonusSubstanceData><type></type></MapBonusSubstanceData>')
 
-                # 將type轉為正確值
-                _tMapBonusSubstanceData.MapBonusSubstanceData.type.string = str(
-                    _iType)
+                # type
+                TagMapBonusSubstanceData.MapBonusSubstanceData.type.string = str(
+                    InputType)
 
                 # chara
-                _tChara = SubstanceTagMaker('MapBonus', 'chara', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(_tChara)
+                TagChara = SubstanceTagMaker('MapBonus', 'chara', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(TagChara)
 
                 # charaWorks
-                _tCharaWorks = SubstanceTagMaker(
-                    'MapBonus', 'charaWorks', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(
-                    _tCharaWorks)
+                TagCharaWorks = SubstanceTagMaker(
+                    'MapBonus', 'charaWorks', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(
+                    TagCharaWorks)
 
                 # skill
-                _tSkill = SubstanceTagMaker('MapBonus', 'skill', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(_tSkill)
+                TagSkill = SubstanceTagMaker('MapBonus', 'skill', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(TagSkill)
 
                 # skillCategory
-                _tSkillCategory = SubstanceTagMaker(
-                    'MapBonus', 'skillCategory', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(
-                    _tSkillCategory)
+                TagSkillCategory = SubstanceTagMaker(
+                    'MapBonus', 'skillCategory', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(
+                    TagSkillCategory)
 
                 # music
-                _tMusic = SubstanceTagMaker('MapBonus', 'music', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(_tMusic)
+                TagMusic = SubstanceTagMaker('MapBonus', 'music', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(TagMusic)
 
                 # musicGenre
-                _tMusicGenre = SubstanceTagMaker(
-                    'MapBonus', 'musicGenre', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(
-                    _tMusicGenre)
+                TagMusicGenre = SubstanceTagMaker(
+                    'MapBonus', 'musicGenre', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(
+                    TagMusicGenre)
 
                 # musicWorks
-                _tMusicWorks = SubstanceTagMaker(
-                    'MapBonus', 'musicWorks', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(
-                    _tMusicWorks)
+                TagMusicWorks = SubstanceTagMaker(
+                    'MapBonus', 'musicWorks', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(
+                    TagMusicWorks)
 
                 # musicDif
-                _tMusicDif = SubstanceTagMaker('MapBonus', 'musicDif', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(
-                    _tMusicDif)
+                TagMusicDif = SubstanceTagMaker('MapBonus', 'musicDif', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(
+                    TagMusicDif)
 
                 # musicLv
-                _tMusicLv = SubstanceTagMaker('MapBonus', 'musicLv', _iType)
-                _tMapBonusSubstanceData.MapBonusSubstanceData.append(_tMusicLv)
+                TagMusicLv = SubstanceTagMaker('MapBonus', 'musicLv', InputType)
+                TagMapBonusSubstanceData.MapBonusSubstanceData.append(TagMusicLv)
 
-                _dXml.MapBonusData.substances.list.append(
-                    _tMapBonusSubstanceData)
-                if _iCount == 3:
-                    _fFinish = True
+                XMLData.MapBonusData.substances.list.append(
+                    TagMapBonusSubstanceData)
+                if CountOfBonus == 3:
+                    IsFinish = True
                 else:
-                    _iCount = _iCount+1
+                    CountOfBonus = CountOfBonus+1
 
         # print(_dXml.prettify())
-        _sSavePath = getconfig('SavePath', 'MapBonusPath') + \
-            '/MapBonus'+_sMapBonusNum
-        if not os.path.isdir(_sSavePath):
-            os.mkdir(_sSavePath)
+        SavePath = GetConfig('SavePath', 'MapBonusPath') + \
+            '/MapBonus'+MapBonusNum
+        if not os.path.isdir(SavePath):
+            os.mkdir(SavePath)
 
-        with open(_sSavePath+'/MapBonus.xml', 'w', encoding='utf-8')as f:
-            f.write(str(_dXml))
-            f.close()
+        with open(SavePath+'/MapBonus.xml', 'w', encoding='utf-8')as File:
+            File.write(str(XMLData))
+            File.close()
 
-        XMLFormat(_sSavePath+'/MapBonus.xml')
+        XMLFormat(SavePath+'/MapBonus.xml')
         print(Fore.GREEN+Content['Cross']['Output']
               ['Xml_Make_Finish'].replace('%now%', 'MapBonus')+Fore.RESET)
         if sys.platform == 'win32':

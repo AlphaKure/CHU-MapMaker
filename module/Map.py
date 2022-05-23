@@ -5,143 +5,147 @@ from module.substances import *
 
 
 def MapM(Content):
-    if not checkconfig('SavePath', 'MapPath'):
+    '''
+    ## Used to create Map.xml
+    '''
+    if not CheckConfig('SavePath', 'MapPath'):
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['No_Save_Path'].replace('%now%', 'Map')+Fore.RESET)
         if sys.platform == 'win32':
             os.system('PAUSE')
         return
     else:
-        # 建立Xml資料
-        _dXml = tagM('')
+        # Create XML data
+        XMLData = TagM('')
 
         # add data title
-        _tXmlVer = tagM('<?xml version="1.0" encoding="utf-8"?>')
-        _tTitle = tagM(
+        TagXMLVer = TagM('<?xml version="1.0" encoding="utf-8"?>')
+        TagTitle = TagM(
             '<MapData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></MapData>')
-        _dXml.append(_tXmlVer)
-        _dXml.append(_tTitle)
+        XMLData.append(TagXMLVer)
+        XMLData.append(TagTitle)
 
         # add dataname ,name and netDispPeriod tags
-        _sMapNum = input(
+        MapNum = input(
             Fore.GREEN+Content['Cross']['Input']['Input_Num'].replace('%now%', 'Map')+Fore.RESET)
-        _sMapStr = input(
+        MapStr = input(
             Fore.GREEN+Content['Cross']['Input']['Input_Name'].replace('%now%', 'Map')+Fore.RESET)
-        _tName = tagM('<name><id>'+_sMapNum+'</id><str>' +
-                      _sMapStr+'</str><data/></name>')
-        if len(_sMapNum) > 8:
+        TagName = TagM('<name><id>'+MapNum+'</id><str>' +
+                       MapStr+'</str><data/></name>')
+        if len(MapNum) > 8:
             print(Fore.RED+Content['Cross']['Error_Msg']
                   ['Num_Out_of_range'].replace('%now%', 'Map')+Fore.RESET)
             if sys.platform == 'win32':
                 os.system('PAUSE')
             return
-        while len(_sMapNum) != 8:
-            _sMapNum = '0'+_sMapNum
-        _tNetDispPeriod = tagM('<netDispPeriod>false</netDispPeriod>')
-        _tDataName = tagM('<dataName>map'+_sMapNum+'</dataName>')
+        while len(MapNum) != 8:
+            MapNum = '0'+MapNum
+        TagNetDispPeriod = TagM('<netDispPeriod>false</netDispPeriod>')
+        TagDataName = TagM('<dataName>map'+MapNum+'</dataName>')
 
-        _dXml.MapData.append(_tDataName)
-        _dXml.MapData.append(_tNetDispPeriod)
-        _dXml.MapData.append(_tName)
+        XMLData.MapData.append(TagDataName)
+        XMLData.MapData.append(TagNetDispPeriod)
+        XMLData.MapData.append(TagName)
 
         # maptype setup default=2(Maybe wrong) infinit map=1
-        _sIsMapInfinit = input(
+        IsMapInfinit = input(
             Fore.GREEN+Content['Map']['Input']['IsMapInfinit']+Fore.RESET).lower()
-        if _sIsMapInfinit == 'y':
-            _sIsMapInfinit = '1'
+        if IsMapInfinit == 'y':
+            IsMapInfinit = '1'
         else:
-            _sIsMapInfinit = '2'
+            IsMapInfinit = '2'
 
-        _tMapType = tagM('<mapType>'+_sIsMapInfinit+'</mapType>')
-        _dXml.MapData.append(_tMapType)
+        TagMapType = TagM('<mapType>'+IsMapInfinit+'</mapType>')
+        XMLData.MapData.append(TagMapType)
 
         # mapFilter setting
         print(Fore.GREEN+Content['Map']['Menu']['Title']+Fore.RESET)
         print(Fore.GREEN+Content['Map']['Menu']['Help']+Fore.RESET)
-        for i in range(0, 4):
-            print(Fore.GREEN+Content['Map']['Menu']['Type_'+str(i)]+Fore.RESET)
-        _sMapFilterId = input(Fore.GREEN+'>'+Fore.RESET)
-        _sMapFilterStr, _sMapFilterData = mapFilter(_sMapFilterId)
-        _tMapFilterID = tagM('<mapFilterID><id>'+_sMapFilterId+'</id><str>' +
-                             _sMapFilterStr+'</str><data>'+_sMapFilterData+'</data></mapFilterID>')
-        _dXml.MapData.append(_tMapFilterID)
+        for Num in range(0, 4):
+            print(Fore.GREEN+Content['Map']['Menu']
+                  ['Type_'+str(Num)]+Fore.RESET)
+        MapFilterId = input(Fore.GREEN+'>'+Fore.RESET)
+        MapFilterStr, MapFilterData = mapFilter(MapFilterId)
+        TagMapFilterID = TagM('<mapFilterID><id>'+MapFilterId+'</id><str>' +
+                              MapFilterStr+'</str><data>'+MapFilterData+'</data></mapFilterID>')
+        XMLData.MapData.append(TagMapFilterID)
 
         # Other useless tag add
-        _dXml.MapData.append(
-            tagM('<categoryName><id>0</id><str>設定なし</str><data /></categoryName>'))
-        _dXml.MapData.append(
-            tagM('<timeTableName><id>-1</id><str>Invalid</str><data /></timeTableName>'))
-        _dXml.MapData.append(tagM('<stopPageIndex>0</stopPageIndex>'))
-        _dXml.MapData.append(tagM(
+        XMLData.MapData.append(
+            TagM('<categoryName><id>0</id><str>設定なし</str><data /></categoryName>'))
+        XMLData.MapData.append(
+            TagM('<timeTableName><id>-1</id><str>Invalid</str><data /></timeTableName>'))
+        XMLData.MapData.append(TagM('<stopPageIndex>0</stopPageIndex>'))
+        XMLData.MapData.append(TagM(
             '<stopReleaseEventName><id>-1</id><str>Invalid</str><data /></stopReleaseEventName>'))
-        _dXml.MapData.append(tagM('<priority>0</priority>'))
+        XMLData.MapData.append(TagM('<priority>0</priority>'))
 
         # add infos tag
-        _dXml.MapData.append(tagM('<infos></infos>'))
+        XMLData.MapData.append(TagM('<infos></infos>'))
 
         # add MapDataAreaInfo
         while True:
-            _tMapDataAreaInfo = tagM('<MapDataAreaInfo></MapDataAreaInfo>')
+            MapDataAreaInfo = TagM('<MapDataAreaInfo></MapDataAreaInfo>')
 
             # mapArea
-            _tMapArea = SubstanceTagMaker('Map', 'mapArea', 0)
-            _tMapDataAreaInfo.MapDataAreaInfo.append(_tMapArea)
+            TagMapArea = SubstanceTagMaker('Map', 'mapArea', 0)
+            MapDataAreaInfo.MapDataAreaInfo.append(TagMapArea)
 
             # ddsMap
-            _tddsMap = SubstanceTagMaker('Map', 'ddsMap', 0)
-            _tMapDataAreaInfo.MapDataAreaInfo.append(_tddsMap)
+            TagDDSMap = SubstanceTagMaker('Map', 'ddsMap', 0)
+            MapDataAreaInfo.MapDataAreaInfo.append(TagDDSMap)
 
             # music
-            _sIsHard, _tMusic = SubstanceTagMaker('Map', 'music', 0)
-            _tMapDataAreaInfo.MapDataAreaInfo.append(_tMusic)
+            IsHard, TagMusic = SubstanceTagMaker('Map', 'music', 0)
+            MapDataAreaInfo.MapDataAreaInfo.append(TagMusic)
 
             # reward
-            _tReward = SubstanceTagMaker('Map', 'reward', 0)
-            _tMapDataAreaInfo.MapDataAreaInfo.append(_tReward)
+            TagReward = SubstanceTagMaker('Map', 'reward', 0)
+            MapDataAreaInfo.MapDataAreaInfo.append(TagReward)
 
             # isHard
-            _tMapDataAreaInfo.MapDataAreaInfo.append(
-                tagM('<isHard>'+_sIsHard+'</isHard>'))
+            MapDataAreaInfo.MapDataAreaInfo.append(
+                TagM('<isHard>'+IsHard+'</isHard>'))
 
             #Page and index
-            _sPage = input(
+            Page = input(
                 Fore.GREEN+Content['Map']['Input']['MapAreaPage']+Fore.RESET)
-            _sIndex = input(
+            Index = input(
                 Fore.GREEN+Content['Map']['Input']['MapAreaIndex']+Fore.RESET)
-            if int(_sIndex) > 8:
+            if int(Index) > 8:
                 print(Fore.RED+Content['Map']['Error_Msg']
                       ['Index_Out_Of_Range']+Fore.RESET)
             else:
-                _tMapDataAreaInfo.MapDataAreaInfo.append(
-                    tagM('<pageIndex>'+_sPage+'</pageIndex>'))
-                _tMapDataAreaInfo.MapDataAreaInfo.append(
-                    tagM('<indexInPage>'+_sIndex+'</indexInPage>'))
+                MapDataAreaInfo.MapDataAreaInfo.append(
+                    TagM('<pageIndex>'+Page+'</pageIndex>'))
+                MapDataAreaInfo.MapDataAreaInfo.append(
+                    TagM('<indexInPage>'+Index+'</indexInPage>'))
 
                 # requiredAchievementCount
-                _sRequiredAchievementCount = input(
+                RequiredAchievementCount = input(
                     Fore.GREEN+'[INFO]Required Achievement Count.(Not enable enter->0)'+Fore.RESET)
-                _tMapDataAreaInfo.MapDataAreaInfo.append(tagM(
-                    '<requiredAchievementCount>'+_sRequiredAchievementCount+'</requiredAchievementCount>'))
+                MapDataAreaInfo.MapDataAreaInfo.append(TagM(
+                    '<requiredAchievementCount>'+RequiredAchievementCount+'</requiredAchievementCount>'))
 
                 # gauge
-                _tgauge = SubstanceTagMaker('Map', 'gauge', 0)
-                _tMapDataAreaInfo.MapDataAreaInfo.append(_tgauge)
+                TagGauge = SubstanceTagMaker('Map', 'gauge', 0)
+                MapDataAreaInfo.MapDataAreaInfo.append(TagGauge)
 
-                _dXml.MapData.infos.append(_tMapDataAreaInfo)
+                XMLData.MapData.infos.append(MapDataAreaInfo)
 
             if input(Fore.GREEN+Content['Map']['Input']['Continue']+Fore.RESET).lower() == 'n':
                 break
 
         # print(_dXml.prettify())
-        _sSavePath = getconfig('SavePath', 'MapPath')+'/map'+_sMapNum
-        if not os.path.isdir(_sSavePath):
-            os.mkdir(_sSavePath)
+        SavePath = GetConfig('SavePath', 'MapPath')+'/map'+MapNum
+        if not os.path.isdir(SavePath):
+            os.mkdir(SavePath)
 
-        with open(_sSavePath+'/Map.xml', 'w', encoding='utf-8')as f:
-            f.write(str(_dXml))
-            f.close()
+        with open(SavePath+'/Map.xml', 'w', encoding='utf-8')as File:
+            File.write(str(XMLData))
+            File.close()
 
-        XMLFormat(_sSavePath+'/Map.xml')
+        XMLFormat(SavePath+'/Map.xml')
         print(Fore.GREEN+Content['Cross']['Output']
               ['Xml_Make_Finish'].replace('%now%', 'Map')+Fore.RESET)
         if sys.platform == 'win32':

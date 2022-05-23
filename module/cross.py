@@ -8,100 +8,127 @@ from colorama import Fore
 from lxml import etree
 
 
-def PathChk() -> bool:
+def PathCheck() -> bool:
+    '''
+    ## Check the user path to avoid the problem of not finding the data.
+    '''
 
-    global Content
+    global Content 
 
-    _NowPath = os.getcwd().lower()
-    if not 'chu-mapmaker' in _NowPath:
+    NowPath = os.getcwd().lower()
+    if not 'chu-mapmaker' in NowPath:
         print(Fore.RED+Content['Cross']['Error_Msg']
               ['SystemPath_Error']+Fore.RESET)
         if sys.platform == 'win32':
             os.system('pause')
         return False
-    if _NowPath.endswith('\module'):
-        os.chdir(_NowPath[:-7])
+    if NowPath.endswith('\module'):
+        os.chdir(NowPath[:-7])
     return True
 
-# 我超懶
+
+def TagM(Data: str) -> BS:
+    '''
+    I am too lazy. LOL.
+    '''
+    Tag = BS(Data, 'xml')
+    return Tag
 
 
-def tagM(data: str) -> BS:
+def GetStr(TargetTag: str, Section: str, Type: str, ItemID: str) -> Tuple[bool, str]:
+    '''
+    ## Find the ID corresponding to Str program from various paths.
 
-    _Tag = BS(data, 'xml')
-    return _Tag
-
-
-def getstr(findkey: str, section: str, type: str, itemid: str) -> Tuple[bool, str]:
-
+    FindKey: Target Tag Name.
+    Section: ini Correspondence Section.
+    Type: ini Correspondence name.
+    ItemID: To find the ID of the corresponding str.
+    '''
     global Content
 
-    _Config = configparser.ConfigParser()
-    _Config.read('config.ini')
-    _LibraryPath = _Config[section][type]
-    for _dir in os.listdir(_LibraryPath):
-        if not os.path.isdir(_LibraryPath+'/'+_dir):
+    Config = configparser.ConfigParser()
+    Config.read('config.ini')
+    LibraryPath = Config[Section][Type]
+    for Dir in os.listdir(LibraryPath):
+        if not os.path.isdir(LibraryPath+'/'+Dir):
             continue
         else:
-            with open(_LibraryPath+'/'+_dir+'/'+type+'.xml', 'r', encoding='utf-8')as f:
-                _dXml = BS(f.read(), 'xml')
-                f.close()
-            if _dXml.find(findkey).id.string == itemid:
-                return True, _dXml.find(findkey).str.string
+            # Open xml files to find
+            with open(LibraryPath+'/'+Dir+'/'+Type+'.xml', 'r', encoding='utf-8')as File:
+                XMLData = BS(File.read(), 'xml')
+                File.close()
+            if XMLData.find(TargetTag).id.string == ItemID:
+                return True, XMLData.find(TargetTag).str.string  # Find Success
     print(Fore.RED+Content['Cross']['Error_Msg']
-          ['Not_Found_ItemID'].replace('%id%', itemid)+Fore.RESET)
+          ['Not_Found_ItemID'].replace('%id%', ItemID)+Fore.RESET)
     if sys.platform == 'win32':
         os.system('pause')
-    return False, ' '
+    return False, ' '  # Find Fail
 
 
-def checkconfig(section: str, type: str) -> bool:
+def CheckConfig(Section: str, Type: str) -> bool:
+    '''
+    ## Used to check if the ini parameter is set or not.
 
-    _Config = configparser.ConfigParser()
-    _Config.read('config.ini')
-    if _Config[section][type]:
+    Section: ini Correspondence Section.
+    Type: ini Correspondence name.
+    '''
+    Config = configparser.ConfigParser()
+    Config.read('config.ini')
+    if Config[Section][Type]:
         return True
     else:
         return False
 
 
-def getconfig(section: str, type: str) -> str:
+def GetConfig(Section: str, Type: str) -> str:
+    '''
+    ## Used to get ini parameter values.
 
-    _Config = configparser.ConfigParser()
-    _Config.read('config.ini')
-    if section == 'SavePath':
-        if _Config[section][type].endswith('/') or _Config[section][type].endswith('\\'):
-            return _Config[section][type][:-1]
-    return _Config[section][type]
-
-
-def XMLFormat(path: str) -> None:
-
-    parser = etree.XMLParser(remove_blank_text=True)
-    tree = etree.parse(path, parser)
-    tree.write(path, pretty_print=True, encoding='utf-8', xml_declaration=True)
+    Section: ini Correspondence Section.
+    Type: ini Correspondence name.
+    '''
+    Config = configparser.ConfigParser()
+    Config.read('config.ini')
+    if Section == 'SavePath':
+        if Config[Section][Type].endswith('/') or Config[Section][Type].endswith('\\'):
+            return Config[Section][Type][:-1]
+    return Config[Section][Type]
 
 
-def musicDif(id: int) -> str:
+def XMLFormat(Path: str) -> None:
+    '''
+    ## Used to format XML.
+    '''
+    Parser = etree.XMLParser(remove_blank_text=True)
+    Tree = etree.parse(Path, Parser)
+    Tree.write(Path, pretty_print=True, encoding='utf-8', xml_declaration=True)
 
+
+def musicDif(InputID: int) -> str:
+    '''
+    Input id. Return musicDif str.
+    '''
     StrList = ['Basic', 'Advanced', 'Expert', 'Master', 'Ultima', 'WorldsEnd']
-    return StrList[id]
+    return StrList[InputID]
 
 
-def mapFilter(id: str) -> Tuple[str, str]:
-
+def mapFilter(InputID: str) -> Tuple[str, str]:
+    '''
+    Input id. Return mapFilter str and data.
+    '''
     global Content
 
-    if id == '0':
+    if InputID == '0':
         NewFilterStr = 'Collaboration'
         NewFilterData = 'イベント'
-    elif id == '1':
+    elif InputID == '1':
         NewFilterStr = 'Current'
         NewFilterData = '現行バージョン'
-    elif id == '2':
+    elif InputID == '2':
         NewFilterStr = 'Sega'
         NewFilterData = 'ゲキチュウマイ'
-    elif id == '3':
+    elif InputID == '3':
         NewFilterStr = 'Other'
         NewFilterData = '過去バージョン'
     else:
@@ -114,5 +141,8 @@ def mapFilter(id: str) -> Tuple[str, str]:
 
 
 def SetContent(Data):
+    '''
+    Used to get text data.
+    '''
     global Content
     Content = Data
