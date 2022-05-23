@@ -1,11 +1,15 @@
 # -*- coding : utf-8-*-
 # pyinstaller -F D:\DeskTop\CHU-MapMaker\main.py  --icon D:\DeskTop\CHU-MapMaker\favicon.ico
-import module
+# pipreqs . --encoding=utf8 --force
+import os
+import sys
 
 import art
 import ujson
 from colorama import Fore
-import os
+
+import module
+
 
 def GetContent(lang):
     try:
@@ -20,8 +24,10 @@ def GetContent(lang):
 
 
 def Main():
-
-    os.system('cls')
+    if sys.platform=='win32':
+        os.system('cls')
+    else:
+        os.system('clear')
     #content read
     Content=GetContent(module.cross.getconfig('lang','lang'))
     if Content=='':
