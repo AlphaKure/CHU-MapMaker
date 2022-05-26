@@ -1,0 +1,144 @@
+{
+    "Cross": {
+        "//Version": "VER 1.0",
+        "Input": {
+            "Input_Num": "[INFO] Please enter the %now% number ( up to 8 digits)>",
+            "Input_Name": "[INFO] Please enter %now% name>",
+            "Input_GamePoint": "[INFO] Please enter the number of bonus game points>",
+            "Input_SkillSeedID": "[INFO] Please enter the reward SkillSeed ID>",
+            "Input_SkillSeedStr": "[INFO] Please enter the reward SkillSeed name>",
+            "Input_SkillSeedCount": "[INFO] Please enter the number of SkillSeeds to be rewarded>",
+            "Input_ID": "[INFO] Please enter %TagName% ID>",
+            "Input_Str": "[INFO] Please enter %TagName% Name>",
+            "Input_MapBonusPoint": "[INFO] Please enter the Bonus to increase the number of masks>",
+            "Input_MapBonusMusicDif": "[INFO] Please enter the difficulty (Number) of the music that triggers Bonus(Ex:Basic -> 0)>",
+            "Input_MapBonusMusicLv": "[INFO] Please enter the level of the music that triggered the Bonus(Ex:14+ -> 14+ 9 -> 9)>",
+            "Input_MapBonusTriggerID": "[INFO] Please enter the %TagName% ID of that triggering Bonus>",
+            "Input_MapBonusTriggerStr": "[INFO] Please enter the %TagName% name of that triggering Bonus>",
+            "Input_MapHaveTaskTrack": "[INFO] Do you want to set a task track in this MapArea? (y/n)>",
+            "Input_TaskTrackID": "[INFO] Please enter the task track music ID>",
+            "Input_TaskTrackStr": "[INFO] Please enter the task track music Name>",
+            "Input_TaskTrackDifLock": "[INFO] Do you want to lock the task track to Master Difficulty? (y/n)>"
+        },
+        "Error_Msg": {
+            "Num_Out_of_Range": "[ERROR] %now% number out of range (up to 8 digits)!!",
+            "Type_Out_Of_Range": "[ERROR] Out of the range of options!",
+            "No_Save_Path": "[ERROR] You haven't set the output %now% location yet!!!",
+            "SystemPath_Error": "[ERROR] Wrong execution location!!!",
+            "Not_Found_ItemID": "[ERROR] %id% not found!",
+            "MapFilter_ID_Error": "[ERROR] Map Type ID Error!"
+        },
+        "Output": {
+            "Xml_Make_Finish": "[Success] %now%.xml build complete!"
+        },
+        "Menu": {
+            "Welcome": "[INFO] Welcome to CHU-MapMaker!!!",
+            "Title":"[INFO] Please select the type of file to be generated:",
+            "Help": "[INFO] Enter the value inside []:",
+            "Type_0":"[0] Reward",
+            "Type_1":"[1] MapBonus",
+            "Type_2":"[2] MapArea",
+            "Type_3":"[3] Map",
+            "Type_4":"[4] Event",
+            "Type_5":"[5] End Program"
+        }
+    },
+    "Reward": {
+        "Input": {
+            "Reward_Num": "[INFO] Please enter the reward number ( up to 9 digits)>"
+        },
+        "Error_Msg": {
+            "Reward_Num_Out_Of_Range": "[ERROR] reward number out of range (up to 9 digits)!"
+        },
+        "Output": {},
+        "Menu": {
+            "Title": "[INFO] Please select the type of Reward you want to set.",
+            "Help": "[INFO] Enter the value inside []:",
+            "Type_0": "[0] gamePoint",
+            "Type_1": "[1] ticket",
+            "Type_2": "[2] trophy",
+            "Type_3": "[3] chara",
+            "Type_4": "[4] skillSeed",
+            "Type_5": "[5] namePlate",
+            "Type_6": "[6] music",
+            "Type_7": "[7] mapIcon",
+            "Type_8": "[8] systemVoice",
+            "Type_9": "[9] avatarAccessory",
+            "Type_10": "[10] frame"
+        }
+    },
+    "MapBonus": {
+        "Input": {},
+        "Error_Msg": {},
+        "Output": {
+            "Counter": "[WARNING] You can set up to 4 Bonus triggering conditions, you have set :%num%"
+        },
+        "Menu": {
+            "Title": "[INFO] Please enter the type of judgment condition you want to set.",
+            "Help": "[INFO] Enter the value inside []:",
+            "Type_0": "[0] chara",
+            "Type_1": "[1] charaWorks",
+            "Type_2": "[2] skill",
+            "Type_3": "[3] skillCategory",
+            "Type_4": "[4] music",
+            "Type_5": "[5] musicGenre",
+            "Type_6": "[6] musicWorks",
+            "Type_7": "[7] musicDif",
+            "Type_8": "[8] musicLv",
+            "Type_9": "[9] Finish!"
+        }
+    },
+    "MapArea": {
+        "Input": {
+            "MapBonus_ID": "[INFO] Please enter the ID of the corresponding MapBonus>",
+            "MapBonus_Str": "[INFO] Please enter the name of the corresponding MapBonus>",
+            "Enable_Boost": "[INFO] Does this MapArea activate Map Boost? (y/n)>",
+            "Boost_Multiplier": "[INFO] Please enter the Map Boost multiplier (Ex: 1.2)>",
+            "ShortenData": "[INFO] Please enter the %Count% ShortenData value (Or input -1 to end)>",
+            "MapArea_EndIndex": "[INFO] Please enter this MapArea endpoint>",
+            "Other_Reward_Index": "[INFO] Please enter the location of the other awards before the end point (or enter -1 to end)>",
+            "Other_Reward_ID": "[INFO] Please enter the reward id",
+            "Other_Reward_Str": "[INFO] Please enter the reward name>"
+        },
+        "Error_Msg": {
+            "Other_Reward_Index_Out_Of_Range": "[ERROR] Reward position over range!!"
+        },
+        "Output": {
+            "ShortenData_Count": "[INFO] It is the %Count% ShortenData"
+        },
+        "Menu": {}
+    },
+    "Map": {
+        "Input": {
+            "IsMapInfinit": "[INFO] Is this map an infinite map??(y/n)>",
+            "MapAreaPage": "[INFO] Please enter which page the MapArea is on>",
+            "MapAreaIndex": "[INFO] Please enter the index in which the MapArea is located>",
+            "AchievementCount": "[INFO] Please enter required Achievement Count of the MapArea>",
+            "Continue": "[INFO] Continue?"
+        },
+        "Error_Msg": {
+            "Index_Out_Of_Range": "[ERROR] Index out of range!"
+        },
+        "Output": {},
+        "Menu": {
+            "Title":"[INFO] The species of this map are?",
+            "Help":"[INFO] Enter the value inside []:",
+            "Type_0": "[0] Collaboration",
+            "Type_1": "[1] Current",
+            "Type_2": "[2] Sega",
+            "Type_3": "[3] Other"
+        }
+    },
+    "Event": {
+        "Input": {
+            "AddDdsBanner": "[INFO] Do you want to add a ddsBanner for this map?(y/n)>",
+            "DdsBannerID": "[INFO] Please enter ddsBanner ID>",
+            "DdsBannerStr": "[INFO] Please enter ddsBanner name>",
+            "MapID": "[INFO] Please enter the corresponding Map ID>",
+            "MapStr": "[INFO] Please enter the corresponding Map Name>"
+        },
+        "Error_Msg": {},
+        "Output": {},
+        "Menu": {}
+    }
+}
