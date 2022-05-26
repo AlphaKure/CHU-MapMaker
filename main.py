@@ -12,7 +12,7 @@ from colorama import Fore
 import module
 
 
-def GetContent(Lang)->Dict|False:
+def GetContent(Lang)->Dict|bool:
     '''
     ## This program is used to read text json files.
     Transfer the text data into other modules.
